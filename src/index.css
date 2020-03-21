@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+}html, body, #Root, #Root>div {
+    height: 100%
+  }
+#Home{
+    width: 66%;
+    background-image: url("./Images/0001.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+
+#Login{
+    background-color: #9319ff;
+    width: 34%;
+    float: left;
+    background-image: url("./Images/0002.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#Signup{
+    background-color: #ffac19;
+    width: 34%;
+    float: left;
+    background-image: url("./Images/0002.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#UserForm{
+    height: 50%;
+    width: 70%;
+    margin: 30% 17%;
+}
+
+.Form_Header{
+    font-size: xx-large;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    align-self: flex-start;
+}
+
+.Underline{
+    border-bottom: 3px solid #ffffff;
+    padding-bottom: 3%;
+}
+
+.Form_Field{
+    margin-top: 4%;
+    display: flex;
+    height:20%;
+    width: 100%;
+}
+.Form_Field>*{
+    margin: 0 auto;
+}
+.Form_Label{
+    position: absolute;
+    margin-left: 1%;
+    display: none;
+    color: #d3d3d3;
+    font-size: medium;
+}
+
+.Form_Input {
+    font-size: large;
+    height: 75%;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding-left: 4%;
+    padding-top: 2%;
+    outline: none;
+  }
+
+  .Form_Input:focus::placeholder {
+    color: transparent;
+  }
+  .Form_Input::placeholder {
+    color: #d3d3d3;
+  }
+.field-icon {
+    margin-top: 1.7%;
+    width: 3%;
+    height: 5%;
+    right: 5%;
+    position: absolute;
+    opacity: 0.5;
+    background-image: url("./Images/eye-solid.png");
+    background-repeat: no-repeat;
+}
+.field-icon:hover{
+    opacity: 0.9;
+}
+#Form_Input1:focus + #Form_Label1{
+    display: block;
+}
+
+#Form_Input2:focus + #Form_Label2,#Form_Input2:valid + #Form_Label2{
+    display: block;
+}
+
+#Form_Input3:focus + #Form_Label3{
+    display: block;
+}
+
+.Signup_Submit_Button{
+    height: 50%;
+    width: 40%;
+    border: none;
+    background-color: #9319ff;
+    border-radius: 30px;
+    font-weight: 600;
+    color:#ffffff;
+}
+.Login_Submit_Button{
+    height: 50%;
+    width: 40%;
+    border: none;
+    background-color: #ffac19;
+    border-radius: 30px;
+    font-weight: 600;
+    color:#ffffff;
+}
+
+#Nav_Link{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    align-self: flex-start;
+}
+a{
+    text-decoration: none;
+}
+a:hover,a>label:hover{
+    cursor: pointer;
+}
