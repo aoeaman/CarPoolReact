@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 
-type myState = {
+interface myState{
     Password: string
     PasswordHidden:boolean
     Email: string
@@ -33,6 +33,7 @@ export default class SignupForm extends Component<{}, myState> {
     }
     render() {
         return (
+            <div id='Signup'>
             <form id="UserForm" onSubmit={this.handleSubmit.bind(this)}>
                 <div className='Form_Field'>
                     <label className='Form_Header'>S<label className="Underline">ign U</label>p</label>
@@ -50,7 +51,7 @@ export default class SignupForm extends Component<{}, myState> {
                     <label id='Form_Label2' className='Form_Label'>Enter Password</label>
                 </div>
                 <div className='Form_Field'>
-                    <input type="text" name='ConfirmPassword' id='Form_Input3' className='Form_Input'
+                    <input type="password" name='ConfirmPassword' id='Form_Input3' className='Form_Input'
                         onChange={this.onInput.bind(this)} placeholder="Confirm Password"></input>
 
                     <label id='Form_Label3' className='Form_Label'>Confirm Password</label>
@@ -62,6 +63,7 @@ export default class SignupForm extends Component<{}, myState> {
                 <label id='Nav_Link' className='ms-fontColor-white'>Already a Member? <Link to='/Login' className='ms-fontWeight-semibold ms-fontColor-white'><label className="Underline">LOG </label>IN</Link></label>
                 </div>
             </form>
+            </div>
         );
     }
 }

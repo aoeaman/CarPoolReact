@@ -1,26 +1,23 @@
 import * as React from 'react';
-import { Switch, Route, Router } from 'react-router';
-import LoginComponent from './Login';
-import SignupComponent from './Signup';
-import { createBrowserHistory } from 'history';
+import { Route,BrowserRouter as Router } from 'react-router-dom';
 import LoginForm from './LoginForm';
-const history = createBrowserHistory();
+import SignupForm from './SignupForm';
 
 type myState={
-    isAuthenticated:boolean
+    match:any
 }
 export default class StartPage extends React.Component<{},myState>{
     constructor(props){
-        super(props)
-        this.state={isAuthenticated:false}
+        super(props);
+        this.state={match:history};
     }
     render() {
         return (
-            <Router history={history}>
+            <Router>
                 <HomeImage />
-                <Route exact path='/Login' render={(props)=><LoginComponent {...props} isAuthenticated={this.state.isAuthenticated}/>}/>
-                <Route exact path='/Signup' render={()=><SignupComponent/>}></Route>
-
+                <Route exact path='/Login' component={LoginForm}/>
+                <Route exact path='/Signup' component={()=><SignupForm/>}></Route>
+                
             </Router>
         );
     }

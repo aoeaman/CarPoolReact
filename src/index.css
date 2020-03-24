@@ -116,6 +116,7 @@
     border-radius: 30px;
     font-weight: 600;
     color:#ffffff;
+    outline: none;
 }
 .Login_Submit_Button{
     height: 50%;
@@ -125,7 +126,13 @@
     border-radius: 30px;
     font-weight: 600;
     color:#ffffff;
+    outline: none;
 }
+.Login_Submit_Button:hover {
+    background-color: #ffa200;
+    transition: all 0.5s
+  }
+
 
 #Nav_Link{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -134,7 +141,9 @@
 }
 a{
     text-decoration: none;
+    opacity: 0.9;
 }
 a:hover,a>label:hover{
     cursor: pointer;
+    opacity: 1;
 }
