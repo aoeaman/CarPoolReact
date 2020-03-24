@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route,BrowserRouter as Router } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
+import Dashboard from './DashBoard';
 
 type myState={
     match:any
@@ -14,15 +15,11 @@ export default class StartPage extends React.Component<{},myState>{
     render() {
         return (
             <Router>
-                <HomeImage />
                 <Route exact path='/Login' component={LoginForm}/>
                 <Route exact path='/Signup' component={()=><SignupForm/>}></Route>
-                
+                <Route exact path='/Dashboard' component={()=><Dashboard/>}/>
             </Router>
         );
     }
 }
-const HomeImage = () => {
-    return (
-        <div id='Home'></div>);
-}
+
