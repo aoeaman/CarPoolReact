@@ -37,7 +37,7 @@ export default class LoginForm extends React.Component<{}, myState>{
         };
         
         fetch('https://localhost:5001/api/user/login', requestOptions).then(res => res.json()).then((data) => {
-            this.setState({ User: data}); localStorage.setItem('Usertoken', data.item2);
+            console.log(data);this.setState({ User: data.item1}); localStorage.setItem('Usertoken', data.item2);
         }).catch(console.log);
     }
     showPassword() {

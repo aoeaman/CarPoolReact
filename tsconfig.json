@@ -9,5 +9,5 @@
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
     "allowSyntheticDefaultImports": true
-  },
+  }
 }
