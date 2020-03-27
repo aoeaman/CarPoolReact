@@ -1,4 +1,4 @@
-import * as React from 'React';
+import * as React from 'react';
 var jwtDecode = require('jwt-decode');
 import Logo from './Logo';
 import { Redirect, Route, Link, Switch, NavLink } from 'react-router-dom';
@@ -16,7 +16,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
         //this.token=jwtDecode(localStorage.getItem('Usertoken'));
         console.log(this.token)
     }
-    componentWillMount() {
+    async componentWillMount() {
         if (localStorage.getItem('Usertoken') == undefined) {
             this.setState({ isAuthenticated: false })
         }
