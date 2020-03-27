@@ -1,0 +1,101 @@
+@import '../../Index.scss';
+//urls
+$url_3: url('../../Images/0003.png');
+$url_4: url('../../Images/logo.png');
+
+
+#Dashboard {
+	background-image: $url_3;
+	background-repeat: no-repeat;
+	background-size: 100% 50%;
+	background-position: bottom;
+}
+#Logo {
+	margin-top: 1%;
+	height: 11%;
+	width: 8%;
+	background-image: $url_4;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-size: contain;
+}
+#DropDown {
+	background-image: $url_4;
+	background-repeat: no-repeat;
+	height: 40px;
+	width: 40px;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 50%;
+	border: none;
+	outline: none;
+	margin-top: -5%;
+	margin-right: 3%;
+	float: right;
+	&:focus + #Options {
+		display: block;
+	}
+}
+#User_Name {
+	width: 10%;
+	height: 5%;
+	margin-top: -4%;
+	margin-right: 7%;
+	text-align: end;
+	float: right;
+	font-size: large;
+	font-weight: 700;
+}
+#Options {
+	display: none;
+	float: right;
+	margin-right: 3.5%;
+	margin-top: -1%;
+	width: 10%;
+	height: 15%;
+	list-style-type: none;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 1px 0 $black_20, 0 0 1px 0 $black_19;
+	&:hover {
+		display: block;
+	}
+	> a > div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		color: $gray;
+		height: 33.33%;
+		font-size: medium;
+		justify-content: center;
+		&:hover {
+			background-color: $color_electric_violet_approx;
+			color: $white;
+		}
+	}
+}
+#DashboardHome {
+	height: 87%;
+}
+.DashboardNavs {
+	display: flex;
+	align-items: center;
+	height: 30%;
+	width: 22%;
+	margin-top: 10%;
+	float: left;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 10px;
+	> div {
+		justify-content: center;
+		display: flex;
+		width: 100%;
+		color: $white;
+		font-size: xx-large;
+	}
+	&:first-child {
+		margin-left: 27%;
+	}
+	&:last-child {
+		margin-left: 2%;
+	}
+}

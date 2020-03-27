@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route,BrowserRouter as Router } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-import Dashboard from './DashBoard';
+import Dashboard from '../Dashboard/DashBoard';
 
 type myState={
     match:any

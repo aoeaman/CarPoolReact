@@ -2,32 +2,39 @@ import * as React from 'react';
 var jwtDecode = require('jwt-decode');
 import Logo from './Logo';
 import { Redirect, Route, Link, Switch, NavLink } from 'react-router-dom';
+import NewRide from './NewRide/NewRide';
+import NewOffer from './NewOffer/NewOffer';
+import { Home } from './Home';
 
 interface myStates {
     isAuthenticated: boolean
     redirectTo: string
-    User:object
+    User: object
 }
 export default class Dashboard extends React.Component<{}, myStates>{
-    token:string;
+    token: string;
+    id: string
     constructor(props) {
         super(props)
-        this.state = { isAuthenticated: false, redirectTo: '',User:null }
-        //this.token=jwtDecode(localStorage.getItem('Usertoken'));
-        console.log(this.token)
+        this.state = { isAuthenticated: false, redirectTo: '', User: null }
     }
-    async componentWillMount() {
+    async UNSAFE_componentWillMount() {
         if (localStorage.getItem('Usertoken') == undefined) {
             this.setState({ isAuthenticated: false })
         }
         else {
             this.setState({ isAuthenticated: true })
+            this.token = localStorage.getItem('Usertoken');
+            console.log(this.token)
+
+            this.id = jwtDecode(this.token);
+            console.log(this.id['unique_name'])
         }
     }
-    logout=(e)=>{
+    logout = (e) => {
         alert('Loging Out');
+        this.setState({ isAuthenticated: false });
         localStorage.clear();
-        this.setState({isAuthenticated:false});
     }
     render() {
         if (this.state.isAuthenticated == false) {
@@ -43,24 +50,16 @@ export default class Dashboard extends React.Component<{}, myStates>{
                     <div id="Options">
                         <Link to='/Dashboard/Profile'><div>Profile</div></Link>
                         <Link to='/Dashboard/My Rides'><div>My Rides</div></Link>
-                        <Link to='/Login'  onClick={this.logout}><div>Logout</div></Link>
+                        <Link to='/Login' onClick={this.logout}><div>Logout</div></Link>
                     </div>
                 </React.Fragment>
                 <Switch>
-                    <Home/>
-                    <Route exact path='/Dashboard/NewBooking' />
+                    
+                    <Route path='/Dashboard/NewBooking' component={NewRide} />
+                    <Route path='/Dashboard/NewOffer' component={NewOffer} />
+                    <Route exact path='/Dashboard' component={Home}/>
                 </Switch>
             </div>
         );
     }
-}
-
-export function Home(){
-    return(
-        <div id='DashboardHome'>
-
-            <Link to='/Dashboard/NewBooking' className='ms-bgColor-purple ms-bgColor-themeLight DashboardNavs'><div id='New_Booking'>Book A Ride</div></Link>
-            <Link to='/Dashboard/NewOffer' className='ms-bgColor-yellow ms-bgColor-themeLighterAlt DashboardNavs'><div id='New_offer'>Offer A Ride</div></Link>
-        </div>
-    );
 }

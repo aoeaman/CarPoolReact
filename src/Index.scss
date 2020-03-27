@@ -1,0 +1,52 @@
+﻿
+//colors
+$color_electric_violet_approx: #9319ff;
+$color_sun_approx: #ffac19;
+$white: #fff;
+$color_alto_approx: #d3d3d3;
+$color_orange_peel_approx: #ffa200;
+$black_20: rgba(0, 0, 0, 0.2);
+$black_19: rgba(0, 0, 0, 0.19);
+$gray: #808080;
+
+//fonts
+$font_0: 'Arial';
+$font_1: 'Helvetica';
+$font_2: 'sans-serif';
+$font_3: 'Lucida Sans';
+$font_4: 'Lucida Sans Regular';
+$font_5: 'Lucida Grande';
+$font_6: 'Lucida Sans Unicode';
+$font_7: 'Geneva';
+$font_8: 'Verdana';
+$font_9: 'sans-serif';
+
+* {
+	margin: 0;
+	padding: 0;
+	background-size: contain;
+}
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+}
+a {
+	text-decoration: none;
+	opacity: 0.9;
+	&:hover {
+		cursor: pointer;
+		opacity: 1;
+	}
+	> label:hover {
+		cursor: pointer;
+		opacity: 1;
+	}
+}
+#Root {
+	height: 100%;
+	> div {
+		height: 100%;
+	}
+}
