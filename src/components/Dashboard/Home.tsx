@@ -1,14 +1,19 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
-
-export class Home extends React.Component {
+import Logo from "./Header";
+type ContainerProps = {
+    history?: any,
+    match?: any
+}
+export class Home extends React.Component<ContainerProps> {
+    constructor(props) {
+        super(props)
+    }
     render() {
         return (
             <React.Fragment>
-
-                    <Link to='/NewBooking' className='ms-bgColor-purple ms-bgColor-themeLight DashboardNavs'><div id='New_Booking'>Book A Ride</div></Link>
-                    <Link to='/NewOffer' className='ms-bgColor-yellow ms-bgColor-themeLighterAlt DashboardNavs'><div id='New_offer'>Offer A Ride</div></Link>
+                <Link to='/Dashboard/NewBooking' className='ms-bgColor-purple ms-bgColor-themeLight DashboardNavs'><div id='New_Booking'>Book A Ride</div></Link>
+                <Link to='/Dashboard/NewOffer' className='ms-bgColor-yellow ms-bgColor-themeLighterAlt DashboardNavs'><div id='New_offer'>Offer A Ride</div></Link>
             </React.Fragment>
         );
     }
