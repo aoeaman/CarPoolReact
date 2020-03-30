@@ -7,7 +7,7 @@ export default class StartPage extends React.Component{
     render() {
         return (
             <React.Fragment>
-                <Route path='/' component={LoginForm} />
+                <Route exact path='/' component={LoginForm} />
                 <Route path='/Signup' component={SignupForm}></Route>
                 <Route path='/Dashboard' component={Dashboard} />
             </React.Fragment>
