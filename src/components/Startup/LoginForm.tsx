@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 interface myState {
     Password: string
     PasswordHidden: boolean
     Email: string
-    User: any
     isAuthenticated: boolean
 }
 
@@ -13,32 +13,23 @@ export default class LoginForm extends React.Component<{}, myState>{
 
     constructor(props) {
         super(props);
-        this.state = { Password: '', Email: '', PasswordHidden: true, User: null, isAuthenticated: false };
+        this.state = { Password: '', Email: '', PasswordHidden: true, isAuthenticated: false };
 
     }
     onInput(event) {
         let name = event.target.name;
         if (name == "Password")
             this.setState({ Password: event.target.value });
-
         if (name == "Email")
             this.setState({ Email: event.target.value });
     }
 
-    handleSubmit() {
-        let user = {
-            Username: this.state.Email,
-            Password: this.state.Password
-        }
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(user)
-        };
-        
-        fetch('https://localhost:5001/api/user/login', requestOptions).then(res => res.text()).then((data) => {
-            console.log(data);this.setState({ User: data}); localStorage.setItem('Usertoken', data.toString());
+    async handleSubmit() {
+        axios.post('https://localhost:5001/api/user/login', { Username: this.state.Email, Password:this.state.Password}).then((data) => {
+            localStorage.setItem('Usertoken',JSON.stringify(data.data));
         }).catch(console.log);
+        
+        <Redirect from='/Login' to='/Dashboard'></Redirect>
     }
     showPassword() {
         this.setState({ PasswordHidden: false });
@@ -47,7 +38,7 @@ export default class LoginForm extends React.Component<{}, myState>{
         this.setState({ PasswordHidden: true });
     }
     render() {    
-        if (this.state.User != null || localStorage.getItem('Usertoken')){
+        if (localStorage.getItem('Usertoken')){
             return <Redirect to='/Dashboard'></Redirect>
         }
         return (

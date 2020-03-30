@@ -2,9 +2,9 @@ import * as React from 'react';
 var jwtDecode = require('jwt-decode');
 import Logo from './Logo';
 import { Redirect, Route, Link, Switch, NavLink } from 'react-router-dom';
+import { Home } from './Home';
 import NewRide from './NewRide/NewRide';
 import NewOffer from './NewOffer/NewOffer';
-import { Home } from './Home';
 
 interface myStates {
     isAuthenticated: boolean
@@ -17,6 +17,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
     constructor(props) {
         super(props)
         this.state = { isAuthenticated: false, redirectTo: '', User: null }
+        this.logout.bind(this);
     }
     async UNSAFE_componentWillMount() {
         if (localStorage.getItem('Usertoken') == undefined) {
@@ -43,22 +44,22 @@ export default class Dashboard extends React.Component<{}, myStates>{
         return (
             <div id='Dashboard'>
                 <Logo />
-                <React.Fragment>
+                
                     <div id='User_Name'>John Wills</div>
                     <button id='DropDown'>
                     </button>
                     <div id="Options">
-                        <Link to='/Dashboard/Profile'><div>Profile</div></Link>
-                        <Link to='/Dashboard/My Rides'><div>My Rides</div></Link>
+                        <Link to='/Profile'><div>Profile</div></Link>
+                        <Link to='/My Rides'><div>My Rides</div></Link>
                         <Link to='/Login' onClick={this.logout}><div>Logout</div></Link>
                     </div>
-                </React.Fragment>
+                    <div id='DashboardHome'>
                 <Switch>
-                    
-                    <Route path='/Dashboard/NewBooking' component={NewRide} />
-                    <Route path='/Dashboard/NewOffer' component={NewOffer} />
-                    <Route exact path='/Dashboard' component={Home}/>
+                <Route exact path='/NewBooking' component={NewRide} />
+                <Route exact path='/NewOffer'><NewOffer/></Route>
+                <Route exact path='/Dashboard'><Home/></Route>
                 </Switch>
+                </div>
             </div>
         );
     }
