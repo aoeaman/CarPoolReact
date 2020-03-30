@@ -39,7 +39,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
     }
     render() {
         if (this.state.isAuthenticated == false) {
-            return <Redirect to='/Login'></Redirect>
+            return <Redirect to='/'></Redirect>
         }
         return (
             <div id='Dashboard'>
@@ -55,9 +55,9 @@ export default class Dashboard extends React.Component<{}, myStates>{
                     </div>
                     <div id='DashboardHome'>
                 <Switch>
-                <Route exact path='/NewBooking' component={NewRide} />
-                <Route exact path='/NewOffer'><NewOffer/></Route>
-                <Route exact path='/Dashboard'><Home/></Route>
+                <Route path='/NewBooking' component={NewRide} />
+                <Route path='/NewOffer'><NewOffer/></Route>
+                <Route path='/Dashboard'><Home/></Route>
                 </Switch>
                 </div>
             </div>

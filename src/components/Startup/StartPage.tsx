@@ -6,11 +6,12 @@ import Dashboard from '../Dashboard/DashBoard';
 export default class StartPage extends React.Component{
     render() {
         return (
-            <Switch>
-                <Route exact path='/Login' component={LoginForm} />
-                <Route exact path='/Signup' component={SignupForm}></Route>
-                <Route exact path='/Dashboard' component={Dashboard} />
-            </Switch>
+            <React.Fragment>
+                <Route path='/' component={LoginForm} />
+                <Route path='/Signup' component={SignupForm}></Route>
+                <Route path='/Dashboard' component={Dashboard} />
+            </React.Fragment>
+            
         );
     }
 }

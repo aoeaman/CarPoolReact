@@ -29,7 +29,7 @@ export default class LoginForm extends React.Component<{}, myState>{
             localStorage.setItem('Usertoken',JSON.stringify(data.data));
         }).catch(console.log);
         
-        <Redirect from='/Login' to='/Dashboard'></Redirect>
+        <Redirect from='/' to='/Dashboard'></Redirect>
     }
     showPassword() {
         this.setState({ PasswordHidden: false });
