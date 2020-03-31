@@ -1,43 +1,51 @@
 import * as React from 'react';
+import {$} from 'jquery';
+interface myStates{
+    time:string
+}
 
-
-export default class NewRide extends React.Component {
-    logout = (e) => {
-        alert('Loging Out');
-        this.setState({ isAuthenticated: false });
-        localStorage.clear();
+export default class NewRide extends React.Component<{},myStates> {
+    constructor(props){
+        super(props);
+        this.state={time:''};
+        this.GetTime.bind(this);
+    }
+    GetTime(e){
+        console.log(e)
     }
 
     render() {
         return (
             <React.Fragment>
-                <form id='Offer_Book' className='ms-depth-8'>  
-                <div>
-                            <p className='Title'>Book A Ride</p>
-                            <p className='p1'>we get you the matches asap ! </p>
-                    </div>                    
-                    <div>
-                        <label className='Form_Label1'>From</label>
-                    </div>
-                    <div >
-                        <input className='Form_Input1' type='text'></input>
-                    </div>
-                    <div>
-                        <label className='Form_Label1'>To</label>
-                    </div>
-                    <div>
-                        <input className='Form_Input1' type='text'></input>
-                    </div>
-                    <div>
-                        <label className='Form_Label1'>Date</label>
-                    </div>
-                    <div>
-                        <input className='Form_Input1' type='text' placeholder='dd/mm/yy'></input>
-                    </div>
+                <div id='Form_Box' className='ms-depth-8'>
+                    <form id='Box_form'>
+                        <p className='Title'>Book A Ride</p>
+                        <p className='p1'>we get you the matches asap ! </p>
 
-                            
+                        <label className='Form_Label1'>From</label>
+
+                        <input className='Form_Input1' type='text'></input>
+                        <label className='Form_Label1'>To</label>
+
+                        <input className='Form_Input1' type='text'></input>
+
+                        <label className='Form_Label1'>Date</label>
+
+                        <input className='Form_Input1' type='text' placeholder='dd/mm/yy'></input>
+                        
+                        <label className='Form_Label1'>Time</label>
+                        <div>
+                            <button name='5-9' type='button' onClick={this.GetTime}>5am-9am</button>
+                            <button type='button' onClick={this.GetTime}>9am-12pm</button>
+                            <button type='button' onClick={this.GetTime}>12pm-3pm</button>
+                        </div>
+                        <div>
+                            <button type='button' onClick={this.GetTime}>3pm-6pm</button>
+                            <button type='button' onClick={this.GetTime}>6pm-9pm</button>
+                        </div>
                     </form>
+                </div>
             </React.Fragment>
-    );
+        );
     }
 }

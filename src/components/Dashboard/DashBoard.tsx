@@ -1,7 +1,7 @@
 import * as React from 'react';
 var jwtDecode = require('jwt-decode');
 import Header from './Header';
-import { Redirect, Route, Link, Switch, NavLink } from 'react-router-dom';
+import { Redirect, Route, Switch, } from 'react-router';
 import { Home } from './Home';
 import NewRide from './NewRide/NewRide';
 import NewOffer from './NewOffer/NewOffer';
@@ -42,9 +42,9 @@ export default class Dashboard extends React.Component<{}, myStates>{
                 <Header />
                 <div id='DashboardHome'>
                     <Switch>
-                        <Route exact path='/Dashboard/NewBooking' component={(props) => <NewRide {...props} />} />
-                        <Route exact path='/Dashboard/NewOffer' component={(props) => <NewOffer {...props} />} />
-                        <Route exact path='/Dashboard' render={() => <Home />} />
+                        {/* <Route path='/Dashboard/NewBooking' component={NewRide} /> */}
+                        <Route path='/Dashboard/NewOffer' component={NewOffer} />
+                        <Route exact path='/Dashboard' component={Home} />
                     </Switch>
                 </div>
             </div>

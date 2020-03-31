@@ -100,52 +100,84 @@ $url_4: url('../../Images/logo.png');
 	}
 }
 
-#Offer_Book{
+#Form_Box{
 	height: 90%;
 	width: 26%;
-	position: relative;
 	margin-top: 3%;
 	margin-left: 5%;
 	border-radius: 10px;
 	background-color:$white;
-	>div{
-		margin-top: 3%;
-		margin-left: 5%;
-		>label{
-			color: grey;
-			font-size: smaller;
-			height: 3%;
-			width: 100%;
-		}
-		>input{
-			height: 10%;
-			width: 70%;
-			font-size: large;
+}
+#Box_form{
+	display: block;
+	width: 80%;
+	margin-top: 10%;
+	height: 90%;
+	>*{
+		margin-left: 10%;
+		width: 100%;
+		float: left;
+	}
+	label:first-of-type{
+		margin-top: 15%;	
+	}
+	>label{
+		margin-top: 1%;
+		color: grey;
+		font-size: smaller;
+		height: 4%;
+	}
+	>input{
+		height: 10%;
+		font-size: large;
+		margin-top: 2%;
+		outline: 0;
+		border-width: 0 0 2px;
+		border-color: lightblue;
+		&:focus{
 			outline: 0;
 			border-width: 0 0 2px;
-			border-color: lightblue;
-			&:focus{
-				outline: 0;
-				border-width: 0 0 2px;
-				border-color: blue
+			border-color: blue
+		}
+	}
+	>.Title{
+		font-size: xx-large;
+		height: 13%;
+		display: flex;
+		align-items: flex-end;
+	}
+	>.Toggle{
+		height: 10%;
+		width: 20%;
+	}
+	>.p1{
+		display: flex;
+		align-items: flex-start;
+		height: 5%;
+		color: grey;
+	}
+	>div{
+		margin-top: 2%;
+		height: 5%;
+		width: 100%;
+		&:first-child{
+			margin-top: 5%;
+		}
+		>button{
+			margin-top: 1%;
+			height: 100%;
+			width: 28%;
+			font-size: small;
+			border-radius: 15px;
+			border-color:$color_electric_violet_approx;
+			background-color: white;
+			outline: none;
+			border-style: outset;
+			&:not(:first-child){
+				margin-left: 8%;
 			}
 		}
 	}
 }
-.Title{
-	font-size: xx-large;
-	margin-top: 5%;
-	height: 10%;
-	width: 100%;
-}
-.Toggle{
-	height: 10%;
-	width: 20%;
-}
-.p1{
-	margin-top: 1%;
-	height: 10%;
-	width: 100%;
-	color: grey;
-}
+
 
