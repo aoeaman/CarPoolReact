@@ -12,7 +12,6 @@ export default class StartPage extends React.Component {
                     <Route exact path='/' component={LoginForm} />
                     <Route path='/Signup' component={SignupForm}></Route>
                     <Route eaxct path='/Dashboard' component={Dashboard} />
-                    <Route path='/NewBooking' component={NewRide} />
                 </React.Fragment>
             </BrowserRouter>
 
