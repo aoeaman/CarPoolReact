@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import axios from 'axios';
+import UserServices from '../../Services/UserService';
 
 interface myState {
     Password: string
     PasswordHidden: boolean
     Email: string
     isAuthenticated: boolean
+    isLoading:boolean
 }
 
 export default class LoginForm extends React.Component<{}, myState>{
-
+    UserService:UserServices
     constructor(props) {
         super(props);
-        this.state = { Password: '', Email: '', PasswordHidden: true, isAuthenticated: false };
-
+        this.state = { Password: '', Email: '', PasswordHidden: true, isAuthenticated: false,isLoading:false};
+        this.UserService=new UserServices();
     }
     onInput(event) {
         let name = event.target.name;
@@ -24,12 +26,13 @@ export default class LoginForm extends React.Component<{}, myState>{
             this.setState({ Email: event.target.value });
     }
 
-    async handleSubmit() {
-        axios.post('https://localhost:5001/api/user/login', { Username: this.state.Email, Password:this.state.Password}).then((data) => {
-            localStorage.setItem('Usertoken',JSON.stringify(data.data));
-        }).catch(console.log);
-        
+    async handleSubmit(){
+        let token=await this.UserService.Login(this.state.Email,this.state.Password);
+        if(token!=null){
+            localStorage.setItem('Usertoken',token);
+        }
         <Redirect from='/' to='/Dashboard'></Redirect>
+        event.preventDefault();
     }
     showPassword() {
         this.setState({ PasswordHidden: false });
