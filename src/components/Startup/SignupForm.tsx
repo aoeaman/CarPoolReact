@@ -60,6 +60,16 @@ export default class SignupForm extends Component<{}, myState> {
                             <label className='Form_Header'>S<label className="Underline">ign U</label>p</label>
                         </div>
                         <div className='Form_Field'>
+                            <input type='text' name='Name' id='Form_Input1' className='Form_Input'
+                                onChange={this.onInput.bind(this)} placeholder="Name"></input>
+                            <label id='Form_Label1' className='Form_Label'>Name</label>
+                        </div>
+                        <div className='Form_Field'>
+                            <input type='text' name='Username' id='Form_Input1' className='Form_Input'
+                                onChange={this.onInput.bind(this)} placeholder="Username"></input>
+                            <label id='Form_Label1' className='Form_Label'>Username</label>
+                        </div>
+                        <div className='Form_Field'>
                             <input type='text' name='Email' id='Form_Input1' className='Form_Input'
                                 onChange={this.onInput.bind(this)} placeholder="Enter Email Id"></input>
                             <label id='Form_Label1' className='Form_Label'>Enter Email Id</label>

@@ -1,25 +1,40 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import User from "../../Models/User";
 
-export default class Header extends React.Component {
+interface myProps {
+    User: User
+}
+interface myStates {
+    Name: string
+}
+
+export default class Header extends React.Component<myProps, myStates> {
+    constructor(props) {
+        super(props)
+        this.logout.bind(this);
+        this.state = { Name: '' }
+    }
     logout() {
         alert('Loging Out');
         localStorage.clear();
     }
+    componentWillReceiveProps(prevProps) {
+        this.setState({ Name: prevProps.User.name })
+    }
     render() {
-
         return (
             <React.Fragment>
                 <div id='Logo'></div>
-                <UserOptions Logout={this.logout}/>
+                <UserOptions Logout={this.logout} Name={this.state.Name} />
             </React.Fragment>
         );
     }
 }
-export const UserOptions = ({ Logout }) => {
+export const UserOptions = ({ Logout, Name }) => {
     return (
         <React.Fragment>
-            <div id='User_Name'>John Wills</div>
+            <div id='User_Name'>{Name}</div>
             <button id='DropDown'></button>
             <div id="Options">
                 <Link to='/Profile'><div>Profile</div></Link>

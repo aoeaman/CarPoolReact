@@ -1,8 +1,8 @@
 export default class User {
-    constructor(username,password) {
+    constructor() {
         this.Name='';
-        this.Username=username;
-        this.Password=password;
+        this.Username='';
+        this.Password='';
         this.Gender='M';
         this.Age=10;
         this.PhoneNumber='';
