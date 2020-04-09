@@ -5,6 +5,7 @@ interface myStates {
     time: string
     isNext: boolean
     nextText: string
+
 }
 export default class NewOffer extends React.Component<{}, myStates>  {
     constructor(props) {
@@ -14,11 +15,25 @@ export default class NewOffer extends React.Component<{}, myStates>  {
         this.ShowNextForm.bind(this);
     }
     GetTime = (e) => {
-        console.log(e.target.innerHTML);
+        let element=e.target.previousElementSibling;
+        while(element){
+            element.style.backgroundColor='#ffffff'
+            element.style.color='#000000'
+            element=element.previousElementSibling;
+        }
+        element=e.target.nextSibling;
+        while(element){
+            element.style.backgroundColor='#ffffff'
+            element.style.color='#000000'
+            element=element.nextSibling;
+        }
+        e.target.style.backgroundColor='#9319ff';
+        e.target.style.color='#ffffff'
+        console.log(Number(e.target.innerHTML))
+        
     }
     ShowNextForm = () => {
         this.setState({ isNext: !this.state.isNext, nextText: !this.state.isNext ? 'Back >>' : 'Next >>' });
-        console.log(this.state.isNext);
     }
     render() {
         if (this.state.isNext) {
@@ -45,14 +60,12 @@ export default class NewOffer extends React.Component<{}, myStates>  {
                                 <button type='button' onClick={this.GetTime}>5am-9am</button>
                                 <button type='button' onClick={this.GetTime}>9am-12pm</button>
                                 <button type='button' onClick={this.GetTime}>12pm-3pm</button>
-                            </div>
-                            <div>
                                 <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                                 <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                             </div>
                             <button id='Next_Button' type='button' onClick={this.ShowNextForm}>{this.state.nextText}</button>
                         </form>
-                    </div>
+                    </div>  
                     <div id='Form_Box' className='ms-depth-8'>
                         <form id='Box_form'>
                             <p className='Title'>Offer A Ride</p>
@@ -113,8 +126,6 @@ export default class NewOffer extends React.Component<{}, myStates>  {
                                 <button type='button' onClick={this.GetTime}>5am-9am</button>
                                 <button type='button' onClick={this.GetTime}>9am-12pm</button>
                                 <button type='button' onClick={this.GetTime}>12pm-3pm</button>
-                            </div>
-                            <div>
                                 <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                                 <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                             </div>

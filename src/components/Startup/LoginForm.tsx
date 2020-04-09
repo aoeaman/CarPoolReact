@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
-import axios from 'axios';
 import UserServices from '../../Services/UserService';
+import TokenServices from "../../Services/TokenServices";
 
 interface myState {
     Password: string
@@ -29,7 +29,7 @@ export default class LoginForm extends React.Component<{}, myState>{
     async handleSubmit(){
         let token=await this.UserService.Login(this.state.Email,this.state.Password);
         if(token!=null){
-            localStorage.setItem('Usertoken',token);
+            TokenServices.setToken(token);
         }
         <Redirect from='/' to='/Dashboard'></Redirect>
         event.preventDefault();
@@ -48,7 +48,7 @@ export default class LoginForm extends React.Component<{}, myState>{
             <React.Fragment>
                 <div id='Home'></div>
                 <div id='Login'>
-                    <form id="UserForm" onSubmit={this.handleSubmit.bind(this)}>
+                    <form id="LoginForm" onSubmit={this.handleSubmit.bind(this)}>
                         <div className='Form_Field'>
                             <label className='Form_Header'>L<label className="Underline">og I</label>n</label>
                         </div>

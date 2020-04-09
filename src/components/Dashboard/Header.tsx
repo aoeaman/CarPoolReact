@@ -1,26 +1,28 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import User from "../../Models/User";
+import TokenServices from "../../Services/TokenServices";
+import UserServices from "../../Services/UserService";
 
-interface myProps {
-    User: User
-}
 interface myStates {
     Name: string
 }
 
-export default class Header extends React.Component<myProps, myStates> {
+export default class Header extends React.Component<{}, myStates> {
+    UserService: UserServices;
     constructor(props) {
         super(props)
         this.logout.bind(this);
         this.state = { Name: '' }
+        this.UserService=new UserServices();
     }
     logout() {
         alert('Loging Out');
-        localStorage.clear();
+        TokenServices.removeToken();
     }
-    componentWillReceiveProps(prevProps) {
-        this.setState({ Name: prevProps.User.name })
+    async UNSAFE_componentWillMount() {
+        let name=(await this.UserService.getByID(TokenServices.getUserID())).name;
+        this.setState({ Name:name})  ;
     }
     render() {
         return (

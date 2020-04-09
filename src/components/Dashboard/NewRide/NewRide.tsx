@@ -14,6 +14,20 @@ export default class NewRide extends React.Component<{}, myStates> {
         this.ShowNextForm.bind(this);
     }
     GetTime = (e) => {
+        let element=e.target.previousElementSibling;
+        while(element){
+            element.style.backgroundColor='#ffffff'
+            element.style.color='#000000'
+            element=element.previousElementSibling;
+        }
+        element=e.target.nextSibling;
+        while(element){
+            element.style.backgroundColor='#ffffff'
+            element.style.color='#000000'
+            element=element.nextSibling;
+        }
+        e.target.style.backgroundColor='#9319ff';
+        e.target.style.color='#ffffff'
         console.log(e.target.innerHTML);
     }
     ShowNextForm = () => {
@@ -44,8 +58,6 @@ export default class NewRide extends React.Component<{}, myStates> {
                             <button type='button' onClick={this.GetTime}>5am-9am</button>
                             <button type='button' onClick={this.GetTime}>9am-12pm</button>
                             <button type='button' onClick={this.GetTime}>12pm-3pm</button>
-                        </div>
-                        <div>
                             <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                             <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                         </div>

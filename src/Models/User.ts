@@ -1,19 +1,19 @@
 export default class User {
     constructor() {
-        this.Name='';
-        this.Username='';
-        this.Password='';
-        this.Gender='M';
-        this.Age=10;
-        this.PhoneNumber='';
-        this.DrivingLiscenceNumber='';
+        this.name='';
+        this.username='';
+        this.password='';
+        this.gender='M';
+        this.age=10;
+        this.phoneNumber='';
+        this.drivingLiscenceNumber='';
     }
     ID:number
-    Name:string
-    Username:string
-    Password:string
-    Gender:string
-    Age:number
-    PhoneNumber:string
-    DrivingLiscenceNumber:string
+    name:string
+    username:string
+    password:string
+    gender:string
+    age:number
+    phoneNumber:string
+    drivingLiscenceNumber:string
 }
