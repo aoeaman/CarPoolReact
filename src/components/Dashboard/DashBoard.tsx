@@ -23,7 +23,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
     }
 
     async UNSAFE_componentWillMount() {
-        if (localStorage.getItem('Usertoken') == undefined) {
+        if (TokenServices.getToken() == undefined) {
             this.setState({ isAuthenticated: false })
         }
         else {

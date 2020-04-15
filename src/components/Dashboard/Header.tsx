@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import User from "../../Models/User";
 import TokenServices from "../../Services/TokenServices";
 import UserServices from "../../Services/UserService";
@@ -23,6 +23,10 @@ export default class Header extends React.Component<{}, myStates> {
     async UNSAFE_componentWillMount() {
         let name=(await this.UserService.getByID(TokenServices.getUserID())).name;
         this.setState({ Name:name})  ;
+    }
+    componentDidMount(){
+        document.getElementById('Logo').addEventListener("click",()=>{history.pushState(null,null,'/');
+        window.location.reload();})
     }
     render() {
         return (

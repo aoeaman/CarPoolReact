@@ -29,15 +29,6 @@ export default class SignupForm extends Component<{}, myState> {
             [evt.target.name]: value
         });
     }
-    IsEmptyInputs(){
-        let fields=[this.state.Name,this.state.Email,this.state.Password,this.state.Username]
-        for (var x in fields){
-            if(x==''){
-                alert(x+' is Empty')
-                return true;
-            }
-        }
-    }
     async handleSubmit(event) {
         event.preventDefault();
         try {

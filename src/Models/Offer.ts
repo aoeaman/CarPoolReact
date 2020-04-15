@@ -5,17 +5,16 @@ export default class Offer {
         this.VehicleID=1
     }
     ID: number
-    UserID: number
+    userID: number
     VehicleID: number
     Source: number
     Destination: number
     StartDate: Date
-    EndDate: Date
     SeatsAvailable: number
     ViaPoints: Array<ViaPoints>
 }
 
-class ViaPoints{
+export class ViaPoints{
     constructor(city:number){
         this.City=city
     }

@@ -1,4 +1,4 @@
-@import "../../Index.scss";
+@import "../../Variables.scss";
 //urls
 $url_3: url("../../Images/0003.png");
 $url_4: url("../../Images/logo.png");
@@ -93,9 +93,9 @@ $url_4: url("../../Images/logo.png");
 	height: 100%;
 	width: 22%;
 	display: inline-block;
-	vertical-align: middle;
 	border-radius: 10px;
 	> div {
+		margin-top: 17%;
 		width: 100%;
 		color: $white;
 		font-size: xx-large;
@@ -107,18 +107,24 @@ $url_4: url("../../Images/logo.png");
 
 #Form_Box {
 	margin-top: 2%;
-	height: 75%;
+	height: 78%;
 	width: 26%;
 	margin-left: 5%;
 	top:0;
 	border-radius: 10px;
 	background-color: $white;
 	float: left;
+	> .Toggle {
+		float: right;
+		margin-top: 15%;
+		margin-right: 10%;
+	}
 }
 #Box_form {
 	display: block;
 	width: 75%;
 	height: 100%;
+	float: left;
 	> * {
 		margin-left: 10%;
 		width: 100%;
@@ -196,10 +202,6 @@ $url_4: url("../../Images/logo.png");
 		display: flex;
 		align-items: flex-end;
 	}
-	> .Toggle {
-		height: 10%;
-		width: 20%;
-	}
 	> .p1 {
 		display: flex;
 		align-items: flex-start;
@@ -243,4 +245,20 @@ $url_4: url("../../Images/logo.png");
 	font-weight: 800;
 	outline: none;
 	cursor: pointer;
+}
+#Offer_Matches{
+	margin-top: 3%;
+	margin-left: 5%;
+	position: relative;
+	height: 75%;
+	width: 50%;
+	float: left;
+	>span{
+		height: 10%;
+		width: 100%;
+		font-size:25px;
+		font-weight: 900;
+		color: $color_electric_violet_approx;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
 }
