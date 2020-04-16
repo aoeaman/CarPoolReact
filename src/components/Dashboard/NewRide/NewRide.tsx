@@ -1,38 +1,53 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import HideText from '../ToggleButtonn';
+import OfferService from '../../../Services/OfferService';
+import Offermatches from './OfferMatches';
 interface myStates {
     time: string
     isNext: boolean
     nextText: string
+    Offers:Array<any>
+    Source: string
+    Destinaiton: string
+    Seats: number
 }
 
 export default class NewRide extends React.Component<{}, myStates> {
+    offerService: OfferService
     constructor(props) {
         super(props);
-        this.state = { time: '', isNext: false, nextText: 'Next >>' };
+        this.state = { Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false, nextText: 'Next >>',Offers:new Array<any>()};
+        this.offerService = new OfferService();
         this.GetTime.bind(this);
-        this.ShowNextForm.bind(this);
+        this.handleSublit.bind(this);
     }
     GetTime = (e) => {
-        let element=e.target.previousElementSibling;
-        while(element){
-            element.style.backgroundColor='#ffffff'
-            element.style.color='#000000'
-            element=element.previousElementSibling;
+        let element = e.target.previousElementSibling;
+        while (element) {
+            element.style.backgroundColor = '#ffffff'
+            element.style.color = '#000000'
+            element = element.previousElementSibling;
         }
-        element=e.target.nextSibling;
-        while(element){
-            element.style.backgroundColor='#ffffff'
-            element.style.color='#000000'
-            element=element.nextSibling;
+        element = e.target.nextSibling;
+        while (element) {
+            element.style.backgroundColor = '#ffffff'
+            element.style.color = '#000000'
+            element = element.nextSibling;
         }
-        e.target.style.backgroundColor='#9319ff';
-        e.target.style.color='#ffffff'
-        console.log(e.target.innerHTML);
+        e.target.style.backgroundColor = '#9319ff';
+        e.target.style.color = '#ffffff'
+        this.setState({ time: e.target.innerHTML })
     }
-    ShowNextForm = () => {
-        this.setState({ isNext: !this.state.isNext, nextText: 'Back >>' });
-        console.log(this.state.isNext);
+    onInput = (evt) => {
+        let value = evt.target.value
+        this.setState({
+            ...this.state,
+            [evt.target.name]: value
+        });
+    }
+    handleSublit = async () => {
+        let offers = await this.offerService.getFilteredOffers(this.state.Source, this.state.Destinaiton, this.state.Seats);
+        this.setState({Offers:offers})
     }
     render() {
         return (
@@ -43,15 +58,13 @@ export default class NewRide extends React.Component<{}, myStates> {
                         <p className='p1'>we get you the matches asap!</p>
 
                         <label className='Form_Label1'>From</label>
+                        <input className='Form_Input1' name='Source' onChange={this.onInput} type='text'></input>
 
-                        <input className='Form_Input1' name='Source' type='text'></input>
                         <label className='Form_Label1'>To</label>
-
-                        <input className='Form_Input1' name='Destination' type='text'></input>
+                        <input className='Form_Input1' name='Destination' onChange={this.onInput} type='text'></input>
 
                         <label className='Form_Label1'>Date</label>
-
-                        <input className='Form_Input1' type='text' name='Date' placeholder='dd/mm/yy'></input>
+                        <input className='Form_Input1' type='text' name='Date' onChange={this.onInput} placeholder='dd/mm/yy'></input>
 
                         <label className='Form_Label1'>Time</label>
                         <div>
@@ -61,9 +74,11 @@ export default class NewRide extends React.Component<{}, myStates> {
                             <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                             <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                         </div>
-                        <button className='Submit_Button' type='button'>Submit</button>
+                        <button className='Submit_Button' onClick={this.handleSublit} type='button'>Submit</button>
                     </form>
+                    <HideText />
                 </div>
+                <Offermatches Offers={this.state.Offers} />
             </React.Fragment>
         );
     }

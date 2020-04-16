@@ -4,7 +4,7 @@ export default class Offer {
         this.StartDate=new Date();
         this.VehicleID=1
     }
-    ID: number
+    id: number
     userID: number
     VehicleID: number
     Source: number
