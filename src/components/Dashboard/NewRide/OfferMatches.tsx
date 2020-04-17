@@ -14,39 +14,31 @@ interface myStates {
 export default class Offermatches extends React.Component<myProps, myStates>{
     constructor(props) {
         super(props);
-        this.state = { Offers: new Array<Offer>(), items: [] }
+        this.state = { Offers: new Array<Offer>(), items: new Array<any>() }
+        this.renderItems.bind(this);
     }
     componentWillReceiveProps() {
         this.renderItems();
     }
-    renderItems = () => {
+    renderItems(){
         let newArr = this.props.Offers;
-        let items = [];
-        if (newArr.length!=0) {
-            newArr.forEach(e => {
-                items.push(
-                    <li id='OfferCard' key={e.id}>
-                        <span id='name'>Username{e.Source}</span>
-                    </li>
-                );
-            });
-            console.log(this.state.items);
-        }
+        let items =new Array<any>();
+        items.push(newArr.map(o=> <OfferCard offer={o}/>))
         this.setState({ items: items });
     }
     render() {
         return (
             <div id='Offer_Matches'>
                 <span >Your Matches</span>
-                <ul id='Offer_Matches'>
+                <ul >
                     {this.state.items}
                 </ul>
             </div>
         );
     }
 }
-const OfferCard = (offer: Offer) => {
-    let name = GetName(offer.userID);
+const OfferCard=({offer})=>{
+    let name=GetName(offer.userID);
     return (
         <div id='OfferCard' key={offer.id}>
             <span id='name'>Username{name}</span>
@@ -55,6 +47,5 @@ const OfferCard = (offer: Offer) => {
 }
 async function GetName(id: number) {
     let name = (await UserService.getByID(id.toString())).name;
-    console.log(name)
     return name;
 }

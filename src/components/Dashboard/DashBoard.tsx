@@ -37,7 +37,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
         }
         return (
             <div id='Dashboard'>
-                <Header />
+                <Header/>
                 <Switch>
                     <Route path='/Dashboard/NewBooking' component={NewRide} />
                     <Route path='/Dashboard/NewOffer' component={NewOffer} />

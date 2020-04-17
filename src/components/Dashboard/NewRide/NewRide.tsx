@@ -2,11 +2,13 @@ import * as React from 'react';
 import HideText from '../ToggleButtonn';
 import OfferService from '../../../Services/OfferService';
 import Offermatches from './OfferMatches';
+import UserServices from '../../../Services/UserService';
+const UserService = new UserServices();
 interface myStates {
     time: string
     isNext: boolean
     nextText: string
-    Offers:Array<any>
+    Offers: Array<any>
     Source: string
     Destinaiton: string
     Seats: number
@@ -16,7 +18,7 @@ export default class NewRide extends React.Component<{}, myStates> {
     offerService: OfferService
     constructor(props) {
         super(props);
-        this.state = { Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false, nextText: 'Next >>',Offers:new Array<any>()};
+        this.state = { Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false, nextText: 'Next >>', Offers: new Array<any>() };
         this.offerService = new OfferService();
         this.GetTime.bind(this);
         this.handleSublit.bind(this);
@@ -47,7 +49,16 @@ export default class NewRide extends React.Component<{}, myStates> {
     }
     handleSublit = async () => {
         let offers = await this.offerService.getFilteredOffers(this.state.Source, this.state.Destinaiton, this.state.Seats);
-        this.setState({Offers:offers})
+        let items = new Array<any>(<div className='ms-depth-8 OfferCard' key='500'>
+            <span id='name'>name</span>
+            <span>Source</span>
+            <span>destinantion</span>
+        </div>);
+        offers.forEach(async o => {
+            items.push(<OfferCard offer={o} name={(await UserService.getByID(o.userID.toString())).name} />);
+        })
+        console.log(this.state.Offers);
+        this.setState({ Offers: items });
     }
     render() {
         return (
@@ -78,8 +89,22 @@ export default class NewRide extends React.Component<{}, myStates> {
                     </form>
                     <HideText />
                 </div>
-                <Offermatches Offers={this.state.Offers} />
+                <div id='Offer_Matches'>
+                    <span >Your Matches</span>
+                    <div >
+                        {this.state.Offers}
+                    </div>
+                </div>
             </React.Fragment>
         );
     }
+}
+const OfferCard = ({ offer, name }) => {
+    return (
+        <div className='ms-depth-8 OfferCard' key={offer.id}>
+            <span id='name'>{name}</span>
+            <span>{offer.source}</span>
+            <span>{offer.destinantion}</span>
+        </div>
+    );
 }
