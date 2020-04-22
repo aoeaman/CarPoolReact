@@ -1,7 +1,7 @@
 import * as React from 'react';
 import OfferService from '../../../Services/OfferService';
 import { Redirect } from 'react-router';
-import HideText from '../ToggleButtonn';
+import HideText from '../ToggleButton';
 import { Toggle } from 'office-ui-fabric-react';
 interface myStates {
     isNext: boolean

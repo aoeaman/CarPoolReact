@@ -3,7 +3,7 @@ import { Toggle } from "office-ui-fabric-react";
 interface myStates {
     Checked: boolean
 }
-export default class HideText extends React.Component<{}, myStates> {
+export default class ToggleComponent extends React.Component<{}, myStates> {
     constructor(props) {
         super(props);
         this.state = { Checked: false }

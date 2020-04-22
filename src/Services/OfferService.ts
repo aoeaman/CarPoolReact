@@ -15,18 +15,28 @@ export default class OfferService {
         offer.Source = Cities[Source];
         offer.Destination = Cities[Destination];
         offer.SeatsAvailable = Number(Seats);
-        offer.ViaPoints = viaPoints.map(vp => new ViaPoints(Cities[vp])).filter(vp=>vp!=undefined);
+        offer.ViaPoints = viaPoints.map(vp => new ViaPoints(Cities[vp])).filter(vp => vp != undefined);
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
         const responce = Axios.post(`https://localhost:5001/api/offer/create`, offer, { headers: { Authorization: AuthStr } });
         return (await responce).data.message
     }
-    async getFilteredOffers(Source: string, Destination: string, Seats: number){
+    async getFilteredOffers(Source: string, Destination: string, Seats: number) {
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
-        const searchQuery=`?source=`+Source+`&destination=`+Destination+`&seats=`+Number(Seats);
+        const searchQuery = `?source=` + Source + `&destination=` + Destination + `&seats=` + 1;
         const responce = Axios.get(`https://localhost:5001/api/offer/search` + searchQuery, { headers: { Authorization: AuthStr } });
-        let data=new Array<Offer>();
-        data=(await responce).data;
+        let data = new Array<Offer>();
+        data = this.parseFilteredData((await responce).data);
         return data;
+    }
+    parseFilteredData(data) {
+        data.forEach(element => {
+            element.source = this.getKeyFromValue(element.source);
+            element.destination = this.getKeyFromValue(element.destination)
+        });
+        return data;
+    }
+    getKeyFromValue(val) {
+        return Object.entries(Cities).find(i => i[1] == val)[0]
     }
 }
 

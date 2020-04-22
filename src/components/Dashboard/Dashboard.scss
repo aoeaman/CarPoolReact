@@ -1,10 +1,11 @@
 @import "../../Variables.scss";
 //urls
-$url_3: url("../../Images/0003.png");
-$url_4: url("../../Images/logo.png");
+$url_0: url(../../Images/0003.png);
+$url_1: url(../../Images/logo.png);
+$url_2: url(../../Images/point.png);
 
 #Dashboard {
-	background-image: $url_3;
+	background-image: $url_0;
 	background-repeat: no-repeat;
 	background-size: 100% 50%;
 	background-position: bottom;
@@ -13,13 +14,13 @@ $url_4: url("../../Images/logo.png");
 	margin-top: 1%;
 	height: 11%;
 	width: 8%;
-	background-image: $url_4;
+	background-image: $url_1;
 	background-repeat: no-repeat;
 	background-position: bottom right;
 	background-size: contain;
 }
 #DropDown {
-	background-image: $url_4;
+	background-image: $url_1;
 	background-repeat: no-repeat;
 	height: 40px;
 	width: 40px;
@@ -46,7 +47,8 @@ $url_4: url("../../Images/logo.png");
 }
 #Options {
 	display: none;
-	float: right;
+	right: 0;
+	position: fixed;
 	margin-right: 3.5%;
 	margin-top: -1%;
 	width: 10%;
@@ -76,15 +78,14 @@ $url_4: url("../../Images/logo.png");
 	height: 77%;
 	margin-top: 10%;
 }
-#DashboardNavs{
-	width:100%;
+#DashboardNavs {
+	width: 100%;
 	height: 30%;
 	text-align: center;
 }
-
-#NameOfUser{
+#NameOfUser {
 	font-size: xx-large;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
 	margin-left: 27%;
 	width: 2%;
 	height: 2%;
@@ -93,6 +94,7 @@ $url_4: url("../../Images/logo.png");
 	height: 100%;
 	width: 22%;
 	display: inline-block;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 	border-radius: 10px;
 	> div {
 		margin-top: 17%;
@@ -104,25 +106,26 @@ $url_4: url("../../Images/logo.png");
 		margin-left: 2%;
 	}
 }
-
 #Form_Box {
 	margin-top: 2%;
 	height: 78%;
 	width: 26%;
 	margin-left: 5%;
-	top:0;
+	top: 0;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 	border-radius: 10px;
 	background-color: $white;
 	float: left;
 	> .Toggle {
+		position: relative;
 		float: right;
-		margin-top: 15%;
-		margin-right: 10%;
+		top:10%;
+		margin-right: 5%;
 	}
 }
 #Box_form {
 	display: block;
-	width: 75%;
+	width: 71%;
 	height: 100%;
 	float: left;
 	> * {
@@ -132,9 +135,10 @@ $url_4: url("../../Images/logo.png");
 	}
 	.Submit_Button {
 		width: 36%;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 25px;
 		height: 7%;
-		color: white;
+		color: $white;
 		background-color: $color_sun_approx;
 		float: left;
 		margin-top: 10%;
@@ -144,41 +148,53 @@ $url_4: url("../../Images/logo.png");
 	.Seat_button {
 		height: 40px;
 		width: 40px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 50%;
-		border-color: grey;
+		border-color: $gray;
 		border-style: solid;
 		outline: none;
 		background-color: inherit;
-		color: black;
+		color: $black;
 		font-size: large;
 	}
-	label:first-of-type {
-		margin-top: 8%;
-	}
-	> .Seats {
-		margin-top: 5%;
-		height: 15%;
-		width: 60%;
-		> div {
-			margin-top: 10%;
-			> button:not(:first-child) {
-				margin-left: 5%;
+	> {
+		.Seats {
+			margin-top: 5%;
+			height: 15%;
+			width: 60%;
+			> div {
+				margin-top: 10%;
+				> button:not(:first-child){
+					margin-left: 5%;
+				}
 			}
 		}
-	}
-	> .Price {
-		margin-top: 5%;
-		height: 15%;
-		width: 20%;
-		float: right;
-		> div {
-			margin-top: 40%;
+		.Price {
+			margin-top: 5%;
+			height: 15%;
+			width: 20%;
+			float: right;
+			> div {
+				margin-top: 40%;
+				font-size: xx-large;
+			}
+		}
+		.Title {
 			font-size: xx-large;
+			height: 13%;
+			display: flex;
+			align-items: flex-end;
+		}
+		.p1 {
+			display: flex;
+			align-items: flex-start;
+			height: 5%;
+			color: $gray;
 		}
 	}
 	> label {
 		margin-top: 5%;
-		color: grey;
+		color: $gray;
 		font-size: smaller;
 		height: 3%;
 	}
@@ -189,28 +205,16 @@ $url_4: url("../../Images/logo.png");
 		font-size: large;
 		outline: 0;
 		border-width: 0 0 2px;
-		border-color: lightblue;
+		border-color: $color_regent_st_blue_approx;
 		&:focus {
 			outline: 0;
 			border-width: 0 0 2px;
-			border-color: blue;
+			border-color: $blue;
 		}
-	}
-	> .Title {
-		font-size: xx-large;
-		height: 13%;
-		display: flex;
-		align-items: flex-end;
-	}
-	> .p1 {
-		display: flex;
-		align-items: flex-start;
-		height: 5%;
-		color: grey;
 	}
 	> div {
 		margin-top: 2%;
-		height:12%;
+		height: 12%;
 		width: 100%;
 		&:first-child {
 			margin-top: 5%;
@@ -220,6 +224,7 @@ $url_4: url("../../Images/logo.png");
 			height: 50%;
 			width: 28%;
 			font-size: small;
+			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 			border-radius: 15px;
 			border-color: $color_electric_violet_approx;
 			background-color: inherit;
@@ -232,6 +237,9 @@ $url_4: url("../../Images/logo.png");
 				margin-left: 0;
 			}
 		}
+	}
+	label:first-of-type {
+		margin-top: 8%;
 	}
 }
 #Next_Button {
@@ -246,31 +254,69 @@ $url_4: url("../../Images/logo.png");
 	outline: none;
 	cursor: pointer;
 }
-#Offer_Matches{
+#Offer_Matches {
 	margin-top: 3%;
-	position: relative;
 	height: 75%;
-	width: 50%;
+	width: 65%;
 	float: left;
-	>span{
+	margin-left: 2%;
+	> span {
 		height: 10%;
 		width: 100%;
-		font-size:25px;
+		font-size: 25px;
 		font-weight: 900;
 		margin-left: 5%;
 		color: $color_electric_violet_approx;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
 	}
-}
-.OfferCard{
-	height: 20%;
-	width: 40%;
-	float: left;
-	display:grid;
-	margin-left: 5%;
-	margin-top: 5%;
-	>#name{
-		font-size: xx-large;
-		font-weight: 600;
+	> #allmatches {
+		display: flex;
+		width: 100%;
+		> .OfferCard {
+			height: 35%;
+			width: 40%;
+			float: left;
+			display: grid;
+			margin-left: 5%;
+			margin-top: 5%;
+			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+			border-radius: 8px;
+			> * {
+				margin-left: 5%;
+				margin-right: 5%;
+				margin-bottom: 3%;
+			}
+			> {
+				#name {
+					font-size: 36px;
+					font-weight: 500;
+					font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+				}
+				#section {
+					height: 100%;
+					display: flex;
+					&:nth-child(1n + 3) > div {
+						width: 50%;
+						height: inherit;
+						&:last-child {
+							margin-left: 14%;
+						}
+					}
+					&:nth-child(2) > #point {
+						background-image: $url_2;
+						background-size: 100% 100%;
+						background-position: bottom;
+						background-repeat: no-repeat;
+						height: 60%;
+						width: 35%;
+						margin-top: 2%;
+					}
+					> div > p:first-child {
+						font-size: small;
+						color: $gray;
+					}
+				}
+			}
+		}
 	}
 }
