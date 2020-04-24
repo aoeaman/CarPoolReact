@@ -1,6 +1,5 @@
 @import "../../Variables.scss";
 //urls
-
 $url_1: url(../../Images/logo.png);
 $url_2: url(../../Images/point.png);
 
@@ -317,5 +316,25 @@ $url_2: url(../../Images/point.png);
 				}
 			}
 		}
+	}
+}
+.Modal-content{
+	height: 20%;
+	max-width: 20%;
+}
+.Modal{
+	background-color: cadetblue;
+	height: 100%;
+	width: 100%;
+	>span{
+		font-size: medium;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+	>button{
+		height: 20%;
+		width: 30%;
+		margin-left: 14%;
+		border-radius: 8px;
+		background-color: firebrick;
 	}
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Toggle from '../ToggleButton';
 import image from '../../../Images/0004.png'
-import OfferService from '../../../Services/OfferService';
-import UserServices from '../../../Services/UserService';
 import Offers from '../OfferCard';
+
+import { MessageBar, MessageBarButton, MessageBarType } from 'office-ui-fabric-react';
 interface myStates {
     time: string
     isNext: boolean
@@ -15,16 +15,15 @@ interface myStates {
 }
 
 export default class NewRide extends React.Component<{}, myStates> {
-    offerService: OfferService;
     constructor(props) {
         super(props);
         this.state = {
             Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false,
             nextText: 'Next >>', Offers:''
         };
-        this.offerService = new OfferService();
         this.GetTime.bind(this);
         this.handleSubmit.bind(this);
+        this.BookRide.bind(this);
     }
     componentDidMount(){
         document.getElementById('Dashboard').style.backgroundImage=`url(${image})`;
@@ -53,9 +52,13 @@ export default class NewRide extends React.Component<{}, myStates> {
             [evt.target.name]: value
         });
     }
+    BookRide=(id: number)=>{
+        
+        console.log(id);
+    }
 
     handleSubmit(){
-        let items=<Offers destination={this.state.Destinaiton} seats={0} source={this.state.Source}/>
+        let items=<Offers destination={this.state.Destinaiton} bookride={this.BookRide} seats={0} source={this.state.Source}/>
         this.setState({Offers:items});
     }
     render() {
@@ -90,8 +93,23 @@ export default class NewRide extends React.Component<{}, myStates> {
                 <div id='Offer_Matches'>
                     <span >Your Matches</span>
                     {this.state.Offers}
+                    
                 </div>
             </React.Fragment>
         );
     }
 }
+const SuccessExample = () => (
+    <MessageBar
+      actions={
+        <div>
+          <MessageBarButton>Yes</MessageBarButton>
+          <MessageBarButton>No</MessageBarButton>
+        </div>
+      }
+      messageBarType={MessageBarType.success}
+      isMultiline={false}
+    >
+     Do you want to book this Ride
+    </MessageBar>
+  );
