@@ -2,7 +2,8 @@ import * as React from 'react';
 import OfferService from '../../../Services/OfferService';
 import { Redirect } from 'react-router';
 import HideText from '../ToggleButton';
-import { Toggle } from 'office-ui-fabric-react';
+import image from '../../../Images/0004.png'
+
 interface myStates {
     isNext: boolean
     nextText: string
@@ -30,6 +31,9 @@ export default class NewOffer extends React.Component<{}, myStates>  {
         this.getTimeAndSeats.bind(this);
         this.ShowNextForm.bind(this);
         this.onSubmit.bind(this);
+    }
+    componentDidMount(){
+        document.getElementById('Dashboard').style.backgroundImage=`url(${image})`;
     }
     getTimeAndSeats = (e) => {
         let element = e.target.previousElementSibling;

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Toggle from '../ToggleButton';
+import image from '../../../Images/0004.png'
 import OfferService from '../../../Services/OfferService';
 import UserServices from '../../../Services/UserService';
-import OfferCard from '../OfferCard';
-const UserService = new UserServices();
+import Offers from '../OfferCard';
 interface myStates {
     time: string
     isNext: boolean
     nextText: string
-    Offers: Array<any>
+    Offers: any
     Source: string
     Destinaiton: string
     Seats: number
@@ -16,17 +16,18 @@ interface myStates {
 
 export default class NewRide extends React.Component<{}, myStates> {
     offerService: OfferService;
-    items:Array<any>;
     constructor(props) {
         super(props);
         this.state = {
             Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false,
-            nextText: 'Next >>', Offers: new Array<any>()
+            nextText: 'Next >>', Offers:''
         };
-        this.items=new Array<any>();
         this.offerService = new OfferService();
         this.GetTime.bind(this);
         this.handleSubmit.bind(this);
+    }
+    componentDidMount(){
+        document.getElementById('Dashboard').style.backgroundImage=`url(${image})`;
     }
     GetTime = (e) => {
         let element = e.target.previousElementSibling;
@@ -52,25 +53,10 @@ export default class NewRide extends React.Component<{}, myStates> {
             [evt.target.name]: value
         });
     }
-    BookRide(id: number) {
-        console.log(id);
-    }
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.Offers !== prevState.Offers) {
-            alert('a');
-            this.setState({Offers:this.items});
-        }
-      }
-    handleSubmit = async () => {
-        this.items = new Array<any>();
-        let offers = await this.offerService.getFilteredOffers(this.state.Source,
-            this.state.Destinaiton, this.state.Seats);
-        offers.forEach(async o => {
-            let name=(await UserService.getByID(o.userID.toString())).name;
-            this.items.push(<OfferCard BookRide={this.BookRide} key={o.id}
-                offer={o} name={name} />);
-        });
-        this.setState({Offers:this.items});
+
+    handleSubmit(){
+        let items=<Offers destination={this.state.Destinaiton} seats={0} source={this.state.Source}/>
+        this.setState({Offers:items});
     }
     render() {
         return (
@@ -97,15 +83,13 @@ export default class NewRide extends React.Component<{}, myStates> {
                             <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                             <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                         </div>
-                        <button className='Submit_Button' onClick={this.handleSubmit} type='button'>Submit</button>
+                        <button className='Submit_Button' onClick={()=>this.handleSubmit()} type='button'>Submit</button>
                     </form>
                     <Toggle />
                 </div>
                 <div id='Offer_Matches'>
                     <span >Your Matches</span>
-                    <div id="allmatches">
-                        {this.state.Offers}
-                    </div>
+                    {this.state.Offers}
                 </div>
             </React.Fragment>
         );

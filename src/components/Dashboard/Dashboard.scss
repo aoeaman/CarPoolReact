@@ -1,11 +1,10 @@
 @import "../../Variables.scss";
 //urls
-$url_0: url(../../Images/0003.png);
+
 $url_1: url(../../Images/logo.png);
 $url_2: url(../../Images/point.png);
 
 #Dashboard {
-	background-image: $url_0;
 	background-repeat: no-repeat;
 	background-size: 100% 50%;
 	background-position: bottom;

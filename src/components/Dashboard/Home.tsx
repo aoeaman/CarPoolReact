@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import UserServices from "../../Services/UserService";
 import TokenServices from "../../Services/TokenServices";
-
+import image from '../../Images/0003.png'
 interface myStates {
     Name: string
 }
@@ -16,6 +16,9 @@ export default class Home extends React.Component<{},myStates> {
     async UNSAFE_componentWillMount() {
         let name=(await this.UserService.getByID(TokenServices.getUserID())).name.split(' ')[0]
         this.setState({ Name:name})  
+    }
+    componentDidMount(){
+        document.getElementById('Dashboard').style.backgroundImage=`url(${image})`;
     }
     render() {
         return (
