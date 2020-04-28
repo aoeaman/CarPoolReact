@@ -1,8 +1,8 @@
 import * as React from 'react';
 import OfferService from '../../../Services/OfferService';
 import { Redirect } from 'react-router';
-import HideText from '../ToggleButton';
-import image from '../../../Images/0004.png'
+import HideText from '../Components/ToggleButton';
+import image from '../../../Images/0004.png';
 
 interface myStates {
     isNext: boolean

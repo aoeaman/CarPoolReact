@@ -1,9 +1,17 @@
 import Offer, { ViaPoints } from "../Models/Offer";
 import Axios from "axios";
 import TokenServices from "./TokenServices";
+import {Cities} from "../Models/Cities";
 
 export default class OfferService {
     async getByID(ID: string) {
+        let offer = new Offer();
+        const AuthStr = TokenServices.getAuthString();
+        const responce = Axios.get(`https://localhost:5001/api/offer/${ID}`, { headers: { Authorization: AuthStr } });
+        offer = JSON.parse(JSON.stringify((await responce).data));
+    }
+    async getByUserID() {
+        let ID=TokenServices.getUserID();
         let offer = new Offer();
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/offer/${ID}`, { headers: { Authorization: AuthStr } });
@@ -14,7 +22,7 @@ export default class OfferService {
         offer.userID = Number(TokenServices.getUserID());
         offer.Source = Cities[Source];
         offer.Destination = Cities[Destination];
-        offer.SeatsAvailable = Number(Seats);
+        offer.seatsAvailable = Number(Seats);
         offer.ViaPoints = viaPoints.map(vp => new ViaPoints(Cities[vp])).filter(vp => vp != undefined);
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
         const responce = Axios.post(`https://localhost:5001/api/offer/create`, offer, { headers: { Authorization: AuthStr } });
@@ -36,20 +44,6 @@ export default class OfferService {
         return data;
     }
     getKeyFromValue(val) {
-        return Object.entries(Cities).find(i => i[1] == val)[0]
+        return Object.entries(Cities).find(i => i[1] == val)[0];
     }
-}
-
-let Cities = {
-    Ahemadabad: 0,
-    Banglore: 1,
-    Chandigarh: 2,
-    Chennai: 3,
-    Dehradun: 4,
-    Gwalior: 5,
-    Hyderabad: 6,
-    Mumbai: 7,
-    Patna: 8,
-    Pune: 9,
-    Vizag: 10,
 }

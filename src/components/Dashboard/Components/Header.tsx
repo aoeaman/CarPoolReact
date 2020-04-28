@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
-import User from "../../Models/User";
-import TokenServices from "../../Services/TokenServices";
-import UserServices from "../../Services/UserService";
+import User from "../../../Models/User";
+import TokenServices from "../../../Services/TokenServices";
+import UserServices from "../../../Services/UserService";
 
 interface myStates {
     Name: string
@@ -32,7 +32,16 @@ export default class Header extends React.Component<{}, myStates> {
         return (
             <React.Fragment>
                 <div id='Logo'></div>
-                <UserOptions Logout={this.logout} Name={this.state.Name} />
+                {/* <UserOptions Logout={this.logout} Name={this.state.Name} /> */}
+                <React.Fragment>
+            <div id='User_Name'>{this.state.Name}</div>
+            <button id='DropDown'></button>
+            <div id="Options">
+                <Link to='/Profile'><div>Profile</div></Link>
+                <Link to='/Dashboard/MyRides'><div>My Rides</div></Link>
+                <Link to='/' onClick={()=>this.logout()}><div>Logout</div></Link>
+            </div>
+        </React.Fragment>
             </React.Fragment>
         );
     }
@@ -44,7 +53,7 @@ export const UserOptions = ({ Logout, Name }) => {
             <button id='DropDown'></button>
             <div id="Options">
                 <Link to='/Profile'><div>Profile</div></Link>
-                <Link to='/My Rides'><div>My Rides</div></Link>
+                <Link to='/MyRides'><div>My Rides</div></Link>
                 <Link to='/' onClick={Logout}><div>Logout</div></Link>
             </div>
         </React.Fragment>

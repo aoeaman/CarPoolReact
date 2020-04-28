@@ -18,12 +18,12 @@ export default class ToggleComponent extends React.Component<{}, myStates> {
         this.setState({ Checked: !this.state.Checked });
         let element = e.target;
         if (this.state.Checked) {
-            history.pushState(null, null, '/Dashboard/NewOffer');
+            window.location.replace('/Dashboard/NewOffer');
         }
         else {
-            history.pushState(null, null, '/Dashboard/NewBooking');
+            window.location.replace('/Dashboard/NewBooking');
         }
-        window.location.reload();
+        
     }
 
     render() {

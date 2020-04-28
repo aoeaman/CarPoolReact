@@ -10,7 +10,7 @@ export default class Offer {
     Source: number
     Destination: number
     StartDate: Date
-    SeatsAvailable: number
+    seatsAvailable: number
     ViaPoints: Array<ViaPoints>
 }
 

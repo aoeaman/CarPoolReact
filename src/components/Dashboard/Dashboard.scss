@@ -73,12 +73,12 @@ $url_2: url(../../Images/point.png);
 	}
 }
 #DashboardHome {
-	height: 77%;
+	height: 65%;
 	margin-top: 10%;
 }
 #DashboardNavs {
 	width: 100%;
-	height: 30%;
+	height: 37%;
 	text-align: center;
 }
 #NameOfUser {
@@ -117,7 +117,7 @@ $url_2: url(../../Images/point.png);
 	> .Toggle {
 		position: relative;
 		float: right;
-		top:10%;
+		top: 10%;
 		margin-right: 5%;
 	}
 }
@@ -162,7 +162,7 @@ $url_2: url(../../Images/point.png);
 			width: 60%;
 			> div {
 				margin-top: 10%;
-				> button:not(:first-child){
+				> button:not(:first-child) {
 					margin-left: 5%;
 				}
 			}
@@ -231,7 +231,8 @@ $url_2: url(../../Images/point.png);
 			&:not(:first-child) {
 				margin-left: 8%;
 			}
-			&:first-child,&:nth-last-child(2){
+			&:first-child,
+			&:nth-last-child(2) {
 				margin-left: 0;
 			}
 		}
@@ -269,72 +270,121 @@ $url_2: url(../../Images/point.png);
 	}
 	> #allmatches {
 		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
 		width: 100%;
-		> .OfferCard {
-			height: 35%;
+		> div {
 			width: 40%;
+			height: 35%;
 			float: left;
-			display: grid;
 			margin-left: 5%;
-			margin-top: 5%;
-			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-			border-radius: 8px;
-			> * {
-				margin-left: 5%;
-				margin-right: 5%;
-				margin-bottom: 3%;
+			margin-top: 3%;
+		}
+	}
+}
+.OfferCard {
+	height: 100%;
+	width: 100%;
+	border-radius: 8px;
+	> * {
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-bottom: 3%;
+	}
+	> {
+		#name {
+			font-size: 36px;
+			font-weight: 500;
+			font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+		}
+		#section {
+			height: 100%;
+			display: flex;
+			&:nth-child(1n + 3) > div {
+				width: 50%;
+				height: inherit;
+				&:last-child {
+					margin-left: 4%;
+				}
 			}
-			> {
-				#name {
-					font-size: 36px;
-					font-weight: 500;
-					font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
-				}
-				#section {
-					height: 100%;
-					display: flex;
-					&:nth-child(1n + 3) > div {
-						width: 50%;
-						height: inherit;
-						&:last-child {
-							margin-left: 14%;
-						}
-					}
-					&:nth-child(2) > #point {
-						background-image: $url_2;
-						background-size: 100% 100%;
-						background-position: bottom;
-						background-repeat: no-repeat;
-						height: 60%;
-						width: 35%;
-						margin-top: 2%;
-					}
-					> div > p:first-child {
-						font-size: small;
-						color: $gray;
-					}
-				}
+			&:nth-child(2) > #point {
+				background-image: $url_2;
+				background-size: 100% 100%;
+				background-position: bottom;
+				background-repeat: no-repeat;
+				width: 35%;
+				margin-top: 2%;
+			}
+			> div > p:first-child {
+				font-size: small;
+				color: $gray;
 			}
 		}
 	}
 }
-.Modal-content{
+.Modal-content {
 	height: 20%;
 	max-width: 20%;
 }
-.Modal{
+.Modal {
 	background-color: cadetblue;
 	height: 100%;
 	width: 100%;
-	>span{
-		font-size: medium;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	}
-	>button{
-		height: 20%;
+	> span {
+		height: 30%;
 		width: 30%;
-		margin-left: 14%;
-		border-radius: 8px;
-		background-color: firebrick;
+		margin-left: 2%;
+		font-size: medium;
+		color: firebrick;
+		font-weight: 700;
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	}
+	> div {
+		height: 25%;
+		width: 100%;
+		margin-top: 5%;
+		display: flex;
+		justify-content: center;
+		justify-content: center;
+		> button {
+			height: 100%;
+			width: 23%;
+			margin-left: 2%;
+			border-radius: 8px;
+			background-color: firebrick;
+		}
+	}
+}
+
+#User_Bookings {
+	width: 40%;
+	margin-left: 3%;
+	float: left;
+	height: 60%;
+	margin-top: 2%;
+	> p {
+		background-color: $color_electric_violet_approx;
+		color: $white;
+		height: 10%;
+		width: 30%;
+		text-align: center;
+		font-size: 21px;
+		border-radius: 5px;
+	}
+}
+#User_Offers {
+	margin-left: 3%;
+	float: left;
+	width: 40%;
+	height: 60%;
+	margin-top: 2%;
+	> p {
+		background-color: $color_sun_approx;
+		color: $white;
+		border-radius: 5px;
+		height: 10%;
+		width: 30%;
+		text-align: center;
+		font-size: 21px;
 	}
 }

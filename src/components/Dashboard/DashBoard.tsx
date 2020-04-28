@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Header from './Header';
+import Header from './Components/Header';
 import { Redirect, Route, Switch, } from 'react-router';
 import Home from './Home';
 import NewRide from './NewRide/NewRide';
@@ -7,6 +7,7 @@ import NewOffer from './NewOffer/NewOffer';
 import UserServices from '../../Services/UserService'
 import User from '../../Models/User';
 import TokenServices from '../../Services/TokenServices';
+import MyRides from './MyRides';
 
 interface myStates {
     isAuthenticated: boolean
@@ -39,9 +40,10 @@ export default class Dashboard extends React.Component<{}, myStates>{
             <div id='Dashboard'>
                 <Header/>
                 <Switch>
+                    <Route exact path='/Dashboard'><Home/></Route>
+                    <Route path='/Dashboard/MyRides' component={MyRides}/>
                     <Route path='/Dashboard/NewBooking' component={NewRide} />
                     <Route path='/Dashboard/NewOffer' component={NewOffer} />
-                    <Route exact path='/Dashboard'><Home/></Route>
                 </Switch>
             </div>
         );

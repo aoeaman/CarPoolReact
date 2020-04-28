@@ -1,9 +1,11 @@
 import * as React from 'react';
-import Toggle from '../ToggleButton';
+import Toggle from '../Components/ToggleButton';
 import image from '../../../Images/0004.png'
-import Offers from '../OfferCard';
+import Offers from './AllMatches';
+import BookingService from '../../../Services/BookingService';
+import { Redirect } from 'react-router';
 
-import { MessageBar, MessageBarButton, MessageBarType } from 'office-ui-fabric-react';
+const bookingService= new BookingService();
 interface myStates {
     time: string
     isNext: boolean
@@ -52,9 +54,10 @@ export default class NewRide extends React.Component<{}, myStates> {
             [evt.target.name]: value
         });
     }
-    BookRide=(id: number)=>{
-        
-        console.log(id);
+    async BookRide(id:number,data:any,seat:any){
+        let BookId=await bookingService.Create(data.source,data.destination,seat,id);
+        alert("Booking Request sent"+BookId);
+        window.location.replace('/dashboard/MyRides');
     }
 
     handleSubmit(){
@@ -99,17 +102,3 @@ export default class NewRide extends React.Component<{}, myStates> {
         );
     }
 }
-const SuccessExample = () => (
-    <MessageBar
-      actions={
-        <div>
-          <MessageBarButton>Yes</MessageBarButton>
-          <MessageBarButton>No</MessageBarButton>
-        </div>
-      }
-      messageBarType={MessageBarType.success}
-      isMultiline={false}
-    >
-     Do you want to book this Ride
-    </MessageBar>
-  );
