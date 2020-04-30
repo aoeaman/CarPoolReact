@@ -315,6 +315,9 @@ $url_2: url(../../Images/point.png);
 				width: 35%;
 				margin-top: 2%;
 			}
+			>#from{
+				width: 17%;
+			}
 			> div > p:first-child {
 				font-size: small;
 				color: $gray;
@@ -357,7 +360,7 @@ $url_2: url(../../Images/point.png);
 }
 
 #User_Bookings {
-	width: 40%;
+	width: 30%;
 	margin-left: 3%;
 	float: left;
 	height: 84%;
@@ -375,7 +378,7 @@ $url_2: url(../../Images/point.png);
 #User_Offers {
 	margin-left: 3%;
 	float: left;
-	width: 40%;
+	width: 30%;
 	height: 84%;
 	margin-top: 2%;
 	> p {
@@ -387,4 +390,16 @@ $url_2: url(../../Images/point.png);
 		text-align: center;
 		font-size: 21px;
 	}
+}
+
+#BookedRides{
+		display: block;
+		width: 100%;
+		max-height: 85%;
+		overflow: auto;
+		> div {
+			width: 80%;
+			height: 35%;
+			margin-top: 3%;
+		}	
 }

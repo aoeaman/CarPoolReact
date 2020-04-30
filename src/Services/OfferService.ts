@@ -5,17 +5,18 @@ import {Cities} from "../Models/Cities";
 
 export default class OfferService {
     async getByID(ID: string) {
-        let offer = new Offer();
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/offer/${ID}`, { headers: { Authorization: AuthStr } });
-        offer = JSON.parse(JSON.stringify((await responce).data));
+        let offer=JSON.parse(JSON.stringify((await responce).data));
+        offer.source=this.getKeyFromValue(offer.source);
+        offer.destination=this.getKeyFromValue(offer.destination);
+        return offer;
     }
     async getByUserID() {
         let ID=TokenServices.getUserID();
-        let offer = new Offer();
         const AuthStr = TokenServices.getAuthString();
-        const responce = Axios.get(`https://localhost:5001/api/offer/${ID}`, { headers: { Authorization: AuthStr } });
-        offer = JSON.parse(JSON.stringify((await responce).data));
+        const responce = Axios.get(`https://localhost:5001/api/offer/DriverOffer/${ID}`, { headers: { Authorization: AuthStr } });
+        return JSON.parse(JSON.stringify((await responce).data));;
     }
     async Create(Source: string, Destination: string, viaPoints: Array<string>, Seats: number) {
         let offer = new Offer();
