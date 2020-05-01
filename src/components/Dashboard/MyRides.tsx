@@ -18,21 +18,37 @@ export default class MyRides extends React.Component<{}, { Bookings: Array<any>,
 		this.Offers = new Array<any>();
 		this.Bookings = new Array<any>();
 		this.getOffers.bind(this);
+		this.getBookings.bind(this);
 	}
 	componentDidMount() {
 		document.getElementById('Dashboard').style.backgroundImage = `url(${image})`;
 		this.getOffers();
+		this.getBookings();
 	}
 	async getOffers() {
 		let items = [];
 		let bookings = await bookingService.getByUserID();
 		bookings.forEach(async o => {
 			let offer = await offerService.getByID(o.offerID);
-			let name = (await UserService.getByID(offer.userID.toString())).name;
-			items.push(<OfferCard Data={offer} name={name} />)
+			let name = (await UserService.getByID(offer.userID)).name;
+			items.push(<OfferCard Data={offer} name={name} />);
 		})
 		this.Bookings = items;
-		this.setState({ Bookings: items })
+		this.setState({ Bookings: items });
+	}
+	async getBookings(){
+		let items=[];
+		let offers=await offerService.getByUserID();
+		offers.forEach(async o=>{
+			let bookings=await bookingService.getByOfferID(o.id);
+			bookings.map(async b=>{
+				let name = (await UserService.getByID(b.userID.toString())).name;
+				items.push(<OfferCard Data={b} name={name} />);
+			});
+
+		})
+		this.Offers = items;
+		this.setState({ Offers: items })
 	}
 
 	render() {
@@ -41,14 +57,17 @@ export default class MyRides extends React.Component<{}, { Bookings: Array<any>,
 		// }
 		return (
 			<React.Fragment>
-				<div id="User_Bookings" key={1}>
-					<p>Booked rides<button onClick={() => this.setState({ Offers: [] })}>lol</button></p>
-					<div id='BookedRides'>
+				<div className="User_Bookings">
+					<p id='p1'>Booked rides<button onClick={() => this.setState({ Offers: [] })}>lol</button></p>
+					<div className='Data'>
 						{this.Bookings}
 					</div>
 				</div>
-				<div id="User_Offers" key={2}>
-					<p>Offered rides</p>
+				<div className="User_Bookings">
+					<p id='p2'>Offered rides</p>
+					<div className='Data'>
+						{this.Offers}
+					</div>
 				</div>
 			</React.Fragment>
 		);

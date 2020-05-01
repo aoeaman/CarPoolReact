@@ -21,11 +21,11 @@ const OfferCard = ({ name, Data }) => {
                 <div id="section">
                     <div id="showDate">
                         <p>Date</p>
-                        <p>{Data.startDate.split(' ')[0]}</p>
+                        <p>{Data.startDate}</p>
                     </div>
                     <div id="interval">
                         <p>Time</p>
-                        {Data.startDate.split(' ')[1]}
+                        {Data.startDate}
                     </div>
                 </div>
                 <div id="section">
