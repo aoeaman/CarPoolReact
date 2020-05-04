@@ -79,7 +79,9 @@ export default class NewOffer extends React.Component<{}, myStates>  {
         return false;
     }
     onSubmit = async () => {
-        let offerID = await this.offerService.Create(this.state.Source, this.state.Destinaiton, this.state.ViaPoints, this.state.Seats);
+        let dateTime=this.state.Date+' 0'+this.state.time[0]+':00:00 '+ (this.state.time.substr(1,2)=='am'?'AM':'PM');
+        let offerID = await this.offerService.Create(this.state.Source,
+             this.state.Destinaiton, this.state.ViaPoints, this.state.Seats,dateTime);
         if (offerID) {
             alert("Offer Created Successfully with ID " + offerID);
             <Redirect to="/" />

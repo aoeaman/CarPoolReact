@@ -18,20 +18,21 @@ export default class OfferService {
         const responce = Axios.get(`https://localhost:5001/api/offer/DriverOffer/${ID}`, { headers: { Authorization: AuthStr } });
         return JSON.parse(JSON.stringify((await responce).data));;
     }
-    async Create(Source: string, Destination: string, viaPoints: Array<string>, Seats: number) {
+    async Create(Source: string, Destination: string, viaPoints: Array<string>, Seats: number,DateTime:any) {
         let offer = new Offer();
         offer.userID = Number(TokenServices.getUserID());
         offer.Source = Cities[Source];
         offer.Destination = Cities[Destination];
         offer.seatsAvailable = Number(Seats);
         offer.ViaPoints = viaPoints.map(vp => new ViaPoints(Cities[vp])).filter(vp => vp != undefined);
+        offer.StartDate=DateTime;
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
         const responce = Axios.post(`https://localhost:5001/api/offer/create`, offer, { headers: { Authorization: AuthStr } });
         return (await responce).data.message
     }
-    async getFilteredOffers(Source: string, Destination: string, Seats: number) {
+    async getFilteredOffers(Source: string, Destination: string, Seats: number,DateTime:any) {
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
-        const searchQuery = `?source=` + Source + `&destination=` + Destination + `&seats=` + 1;
+        const searchQuery = `?source=` + Source + `&destination=` + Destination + `&seats=` + 1+`&dateTime=`+DateTime;
         const responce = Axios.get(`https://localhost:5001/api/offer/search` + searchQuery, { headers: { Authorization: AuthStr } });
         let data = new Array<Offer>();
         data = this.parseFilteredData((await responce).data);

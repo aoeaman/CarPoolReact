@@ -5,7 +5,7 @@ import Popup from "reactjs-popup";
 import OfferCard from "../Components/OfferCard";
 const UserService = new UserServices();
 const offerService = new OfferService();
-class Offers extends React.Component<{ source, destination, seats, bookride }, { Offer }>{
+class Offers extends React.Component<{ source, destination, seats,Date, bookride }, { Offer }>{
     items: any
     constructor(props) {
         super(props);
@@ -17,7 +17,7 @@ class Offers extends React.Component<{ source, destination, seats, bookride }, {
         this.items = [];
         let seat=0;
         let offers = await offerService.getFilteredOffers(this.props.source, this.props.destination,
-            this.props.seats);
+            this.props.seats,this.props.Date);
         offers.forEach(async o => {
             let name = (await UserService.getByID(o.userID.toString())).name;
             let seatButtons = [];

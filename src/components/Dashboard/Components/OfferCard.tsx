@@ -21,21 +21,21 @@ const OfferCard = ({ name, Data }) => {
                 <div id="section">
                     <div id="showDate">
                         <p>Date</p>
-                        <p>{Data.startDate}</p>
+                        <p>{Data.startDate.split(' ')[0]}</p>
                     </div>
                     <div id="interval">
                         <p>Time</p>
-                        {Data.startDate}
+                        {Data.startDate.split(' ')[1]}
                     </div>
                 </div>
                 <div id="section">
                     <div id="price">
                         <p id="label">Price</p>
-                        {/* <p id="priceContent">{props.Data.FarePrice}</p> */}
+                        {Data.fare}
                     </div>
                     <div id="seats">
                         <p id="label">Seats</p>
-                        <p id="seatContent">{Data.seatsAvailable}</p>
+                        <p id="seatContent">{Data.seatsAvailable!=undefined?Data.seatsAvailable:Data.seats}</p>
                     </div>
                 </div>
             </div>

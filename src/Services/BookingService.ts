@@ -7,34 +7,34 @@ export default class BookingService {
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/Booking/${ID}`,
             { headers: { Authorization: AuthStr } });
-        let booking = JSON.parse(JSON.stringify((await responce).data));
-        booking.source = this.getKeyFromValue(booking.source);
-        booking.destination = this.getKeyFromValue(booking.destination);
-        return booking;
+        let Booking = JSON.parse(JSON.stringify((await responce).data));
+        Booking.source = this.getKeyFromValue(Booking.source);
+        Booking.destination = this.getKeyFromValue(Booking.destination);
+        return Booking;
     }
     async getByUserID() {
         let ID = TokenServices.getUserID();
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/Booking/${ID}/Rider`,
             { headers: { Authorization: AuthStr } });
-        let data = this.parseFilteredData(JSON.parse(JSON.stringify((await responce).data)));
+        let data = new Array<Booking>();
+        data = this.parseFilteredData(JSON.parse(JSON.stringify((await responce).data)));
         return data;
     }
     async getByOfferID(ID: string) {
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/Booking/${ID}/Offer`,
             { headers: { Authorization: AuthStr } });
-        let booking = JSON.parse(JSON.stringify((await responce).data));
-        // booking.source = this.getKeyFromValue(booking.source);
-        // booking.destination = this.getKeyFromValue(booking.destination);
-        return booking;
+        let Booking = JSON.parse(JSON.stringify((await responce).data));
+        Booking=this.parseFilteredData(Booking);
+        return Booking;
     }
     async Create(Source: string, Destination: string, Seats: number, OfferID: number) {
         let booking = new Booking();
         booking.Source = Cities[Source];
         booking.Destination = Cities[Destination];
         booking.UserID = Number(TokenServices.getUserID());
-        booking.OfferID = OfferID;
+        booking.offerID = OfferID;
         booking.Seats = Seats;
         booking.Fare = 18.50;
         const AuthStr = `Bearer ${JSON.parse(localStorage.getItem('Usertoken'))}`;
@@ -46,6 +46,8 @@ export default class BookingService {
         data.forEach(element => {
             element.source = this.getKeyFromValue(element.source);
             element.destination = this.getKeyFromValue(element.destination)
+            element.startDate=new Date(element.startDate);
+            element.startDate=element.startDate.toLocaleDateString()+' '+ element.startDate.toLocaleTimeString();
         });
         return data;
     }

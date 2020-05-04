@@ -29,7 +29,7 @@ export default class MyRides extends React.Component<{}, { Bookings: Array<any>,
 		let items = [];
 		let bookings = await bookingService.getByUserID();
 		bookings.forEach(async o => {
-			let offer = await offerService.getByID(o.offerID);
+			let offer = await offerService.getByID(o.offerID.toString());
 			let name = (await UserService.getByID(offer.userID)).name;
 			items.push(<OfferCard Data={offer} name={name} />);
 		})

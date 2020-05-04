@@ -5,12 +5,13 @@ import Offers from './AllMatches';
 import BookingService from '../../../Services/BookingService';
 import { Redirect } from 'react-router';
 
-const bookingService= new BookingService();
+const bookingService = new BookingService();
 interface myStates {
     time: string
     isNext: boolean
     nextText: string
     Offers: any
+    Date:string
     Source: string
     Destinaiton: string
     Seats: number
@@ -21,14 +22,14 @@ export default class NewRide extends React.Component<{}, myStates> {
         super(props);
         this.state = {
             Destinaiton: '', Seats: 0, Source: '', time: '', isNext: false,
-            nextText: 'Next >>', Offers:''
+            nextText: 'Next >>', Offers: '',Date:''
         };
         this.GetTime.bind(this);
         this.handleSubmit.bind(this);
         this.BookRide.bind(this);
     }
-    componentDidMount(){
-        document.getElementById('Dashboard').style.backgroundImage=`url(${image})`;
+    componentDidMount() {
+        document.getElementById('Dashboard').style.backgroundImage = `url(${image})`;
     }
     GetTime = (e) => {
         let element = e.target.previousElementSibling;
@@ -54,15 +55,16 @@ export default class NewRide extends React.Component<{}, myStates> {
             [evt.target.name]: value
         });
     }
-    async BookRide(id:number,data:any,seat:any){
-        let BookId=await bookingService.Create(data.source,data.destination,seat,id);
-        alert("Booking Request sent"+BookId);
+    async BookRide(id: number, data: any, seat: any) {
+        let BookId = await bookingService.Create(data.source, data.destination, seat, id);
+        alert("Booking Request sent" + BookId);
         window.location.replace('/dashboard/MyRides');
     }
 
-    handleSubmit(){
-        let items=<Offers destination={this.state.Destinaiton} bookride={this.BookRide} seats={0} source={this.state.Source}/>
-        this.setState({Offers:items});
+    handleSubmit() {
+        let dateTime = this.state.Date + ' 0' + this.state.time[0] + ':00:00 ' + (this.state.time.substr(1, 2) == 'am' ? 'AM' : 'PM');
+        let items = <Offers destination={this.state.Destinaiton} bookride={this.BookRide} seats={0} source={this.state.Source} Date={encodeURI(dateTime)} />
+        this.setState({ Offers: items });
     }
     render() {
         return (
@@ -89,14 +91,14 @@ export default class NewRide extends React.Component<{}, myStates> {
                             <button type='button' onClick={this.GetTime}>3pm-6pm</button>
                             <button type='button' onClick={this.GetTime}>6pm-9pm</button>
                         </div>
-                        <button className='Submit_Button' onClick={()=>this.handleSubmit()} type='button'>Submit</button>
+                        <button className='Submit_Button' onClick={() => this.handleSubmit()} type='button'>Submit</button>
                     </form>
                     <Toggle />
                 </div>
                 <div id='Offer_Matches'>
                     <span >Your Matches</span>
                     {this.state.Offers}
-                    
+
                 </div>
             </React.Fragment>
         );
