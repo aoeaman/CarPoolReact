@@ -2,14 +2,16 @@
 * {
 	margin: 0;
 	padding: 0;
-	background-size: contain;
 }
+
 html {
-	height: 98%;
+	height: 100%;
 }
+
 body {
 	height: 100%;
 }
+
 a {
 	text-decoration: none;
 	opacity: 0.9;
@@ -22,15 +24,18 @@ a {
 		opacity: 1;
 	}
 }
+
 #Root {
 	height: 100%;
 	> div {
 		height: 100%;
 	}
 }
+
 .Left{
 	float: left;
 }
+
 .Right{
 	float: right;
 }

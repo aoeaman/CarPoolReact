@@ -14,19 +14,21 @@ export default class Header extends React.Component<{}, myStates> {
         super(props)
         this.logout.bind(this);
         this.state = { Name: '' }
-        this.UserService=new UserServices();
+        this.UserService = new UserServices();
     }
     logout() {
         alert('Loging Out');
         TokenServices.removeToken();
     }
     async UNSAFE_componentWillMount() {
-        let name=(await this.UserService.getByID(TokenServices.getUserID())).name;
-        this.setState({ Name:name})  ;
+        let name = (await this.UserService.getByID(TokenServices.getUserID())).name;
+        this.setState({ Name: name });
     }
-    componentDidMount(){
-        document.getElementById('Logo').addEventListener("click",()=>{history.pushState(null,null,'/');
-        window.location.reload();})
+    componentDidMount() {
+        document.getElementById('Logo').addEventListener("click", () => {
+            history.pushState(null, null, '/');
+            window.location.reload();
+        })
     }
     render() {
         return (
@@ -34,28 +36,15 @@ export default class Header extends React.Component<{}, myStates> {
                 <div id='Logo'></div>
                 {/* <UserOptions Logout={this.logout} Name={this.state.Name} /> */}
                 <React.Fragment>
-            <div id='User_Name'>{this.state.Name}</div>
-            <button id='DropDown'></button>
-            <div id="Options">
-                <Link to='/Profile'><div>Profile</div></Link>
-                <Link to='/Dashboard/MyRides'><div>My Rides</div></Link>
-                <Link to='/' onClick={()=>this.logout()}><div>Logout</div></Link>
-            </div>
-        </React.Fragment>
+                    <div id='User_Name'>{this.state.Name}</div>
+                    <button id='DropDown'></button>
+                    <div id="Options">
+                        <Link to='/Dashboard/Profile'><div>Profile</div></Link>
+                        <Link to='/Dashboard/MyRides'><div>My Rides</div></Link>
+                        <Link to='/' onClick={() => this.logout()}><div>Logout</div></Link>
+                    </div>
+                </React.Fragment>
             </React.Fragment>
         );
     }
-}
-export const UserOptions = ({ Logout, Name }) => {
-    return (
-        <React.Fragment>
-            <div id='User_Name'>{Name}</div>
-            <button id='DropDown'></button>
-            <div id="Options">
-                <Link to='/Profile'><div>Profile</div></Link>
-                <Link to='/MyRides'><div>My Rides</div></Link>
-                <Link to='/' onClick={Logout}><div>Logout</div></Link>
-            </div>
-        </React.Fragment>
-    );
 }

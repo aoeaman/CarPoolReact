@@ -8,6 +8,7 @@ import UserServices from '../../Services/UserService'
 import User from '../../Models/User';
 import TokenServices from '../../Services/TokenServices';
 import MyRides from './MyRides';
+import Profile from './Profile';
 
 interface myStates {
     isAuthenticated: boolean
@@ -41,6 +42,7 @@ export default class Dashboard extends React.Component<{}, myStates>{
                 <Header/>
                 <Switch>
                     <Route exact path='/Dashboard'><Home/></Route>
+                    <Route path='/Dashboard/Profile' component={Profile} />
                     <Route path='/Dashboard/MyRides' component={MyRides}/>
                     <Route path='/Dashboard/NewBooking' component={NewRide} />
                     <Route path='/Dashboard/NewOffer' component={NewOffer} />

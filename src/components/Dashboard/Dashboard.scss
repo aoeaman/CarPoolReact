@@ -9,9 +9,10 @@ $url_2: url(../../Images/point.png);
 	background-position: bottom;
 }
 #Logo {
-	margin-top: 1%;
-	height: 11%;
-	width: 8%;
+	padding-top: 2%;
+    margin-left: 3%;
+    height: 10%;
+    width: 5%;
 	background-image: $url_1;
 	background-repeat: no-repeat;
 	background-position: bottom right;
@@ -24,6 +25,7 @@ $url_2: url(../../Images/point.png);
 	width: 40px;
 	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 	border-radius: 50%;
+	background-size: contain;
 	border: none;
 	outline: none;
 	margin-top: -5%;
@@ -280,7 +282,7 @@ $url_2: url(../../Images/point.png);
 			margin-left: 5%;
 			margin-top: 3%;
 		}
-		>.Modal-overlay{
+		> .Modal-overlay {
 			margin: auto auto;
 			height: 100%;
 			width: 100%;
@@ -320,7 +322,7 @@ $url_2: url(../../Images/point.png);
 				width: 35%;
 				margin-top: 2%;
 			}
-			>#from{
+			> #from {
 				width: 18%;
 			}
 			> div > p:first-child {
@@ -379,13 +381,13 @@ $url_2: url(../../Images/point.png);
 		font-size: 21px;
 		border-radius: 5px;
 	}
-	>#p1{
+	> #p1 {
 		background-color: $color_electric_violet_approx;
 	}
-	>#p2{
+	> #p2 {
 		background-color: $color_sun_approx;
 	}
-	>.Data{
+	> .Data {
 		display: block;
 		width: 100%;
 		max-height: 85%;
@@ -394,7 +396,16 @@ $url_2: url(../../Images/point.png);
 			width: 95%;
 			height: 35%;
 			margin-top: 1%;
-		}	
+		}
+	}
 }
+#Profile{
+	height: 74%;
+	width: 100%;
+	>#ProfileImg{
+		margin-top: 2%;
+		margin-left: 20%;
+		height: 40%;
+		width: 12%;
+	}
 }
-
