@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Toggle from '../Components/ToggleButton';
 import image from '../../../Images/0004.png'
-import Offers from './AllMatches';
-import BookingService from '../../../Services/BookingService';
-import { Redirect } from 'react-router';
+import Offers from './MatchedOffers';
+import { BookingService } from '../../../Context';
 
-const bookingService = new BookingService();
 interface myStates {
     time: string
     isNext: boolean
@@ -48,20 +46,20 @@ export default class NewRide extends React.Component<{}, myStates> {
         e.target.style.color = '#ffffff'
         this.setState({ time: e.target.innerHTML })
     }
-    onInput = (evt) => {
-        let value = evt.target.value
+    onInput = (evt: { target: { value: string; name: any; }; }) => {
+        let value:string = evt.target.value
         this.setState({
             ...this.state,
             [evt.target.name]: value
         });
     }
-    async BookRide(id: number, data: any, seat: any) {
-        let BookId = await bookingService.Create(data.source, data.destination, seat, id);
+    BookRide=async (id: number, data: any, seat: any)=> {
+        let BookId = await BookingService.Create(data.source, data.destination, seat, id);
         alert("Booking Request sent" + BookId);
         window.location.replace('/dashboard/MyRides');
     }
 
-    handleSubmit() {
+    handleSubmit=()=> {
         let dateTime = this.state.Date + ' 0' + this.state.time[0] + ':00:00 ' + (this.state.time.substr(1, 2) == 'am' ? 'AM' : 'PM');
         let items = <Offers destination={this.state.Destinaiton} bookride={this.BookRide} seats={0} source={this.state.Source} Date={encodeURI(dateTime)} />
         this.setState({ Offers: items });
@@ -94,11 +92,11 @@ export default class NewRide extends React.Component<{}, myStates> {
                         <button className='Submit_Button' onClick={() => this.handleSubmit()} type='button'>Submit</button>
                     </form>
                     <Toggle />
+                    <div className='RouteIcon'/>
                 </div>
                 <div id='Offer_Matches'>
                     <span >Your Matches</span>
                     {this.state.Offers}
-
                 </div>
             </React.Fragment>
         );

@@ -10,16 +10,15 @@ $url_2: url(../../Images/point.png);
 }
 #Logo {
 	padding-top: 2%;
-    margin-left: 3%;
-    height: 10%;
-    width: 5%;
+	margin-left: 3%;
+	height: 10%;
+	width: 5%;
 	background-image: $url_1;
 	background-repeat: no-repeat;
 	background-position: bottom right;
 	background-size: contain;
 }
 #DropDown {
-	background-image: $url_1;
 	background-repeat: no-repeat;
 	height: 40px;
 	width: 40px;
@@ -121,6 +120,17 @@ $url_2: url(../../Images/point.png);
 		float: right;
 		top: 10%;
 		margin-right: 5%;
+	}
+	> .RouteIcon {
+		background-image: $url_2;
+		background-size:100% 100%;
+		background-repeat: no-repeat;
+		width: 27%;
+		height: 3%;
+		margin-right: 2%;
+		float: right;
+		margin-top: 36%;
+		transform: rotate(90deg);
 	}
 }
 #Box_form {
@@ -303,6 +313,15 @@ $url_2: url(../../Images/point.png);
 			font-size: 36px;
 			font-weight: 500;
 			font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+			> img {
+				height: 40px;
+				width: 40px;
+				border-radius: 50%;
+				background-size: contain;
+				background-repeat: no-repeat;
+				float: right;
+				margin-top: 2%;
+			}
 		}
 		#section {
 			height: 100%;
@@ -319,11 +338,11 @@ $url_2: url(../../Images/point.png);
 				background-size: 100% 100%;
 				background-position: bottom;
 				background-repeat: no-repeat;
-				width: 35%;
+				width: 30%;
 				margin-top: 2%;
 			}
 			> #from {
-				width: 18%;
+				width: 21%;
 			}
 			> div > p:first-child {
 				font-size: small;
@@ -333,16 +352,17 @@ $url_2: url(../../Images/point.png);
 	}
 }
 .Modal-content {
-	height: 20%;
-	max-width: 20%;
+	height: 30%;
+	max-width: 30%;
 }
 .Modal {
 	background-color: cadetblue;
 	height: 100%;
 	width: 100%;
 	> span {
-		height: 30%;
-		width: 30%;
+		display: block;
+		height: 10%;
+		width: 100%;
 		margin-left: 2%;
 		font-size: medium;
 		color: firebrick;
@@ -367,7 +387,7 @@ $url_2: url(../../Images/point.png);
 }
 
 .User_Bookings {
-	width: 35%;
+	width: 30%;
 	margin-left: 3%;
 	float: left;
 	height: 84%;
@@ -399,13 +419,42 @@ $url_2: url(../../Images/point.png);
 		}
 	}
 }
-#Profile{
+#Profile {
 	height: 74%;
 	width: 100%;
-	>#ProfileImg{
+	display: flex;
+	> #ProfileImg {
+		float: left;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 		margin-top: 2%;
 		margin-left: 20%;
 		height: 40%;
 		width: 12%;
+	}
+	> .UserDetails {
+		display: block;
+		height: 100%;
+		width: 65%;
+		margin-top: 2%;
+		margin-left: 2%;
+		> #Name {
+			font-size: 38px;
+			font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+			height: 10%;
+			width: 10%;
+			color: $black;
+		}
+		> div {
+			display: flex;
+			font-size: 18px;
+			font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+			color: grey;
+			height: 5%;
+			width: 15%;
+			> span {
+				color: $black;
+			}
+		}
 	}
 }

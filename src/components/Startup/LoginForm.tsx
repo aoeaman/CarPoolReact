@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
-import UserServices from '../../Services/UserService';
-import TokenServices from "../../Services/TokenServices";
+import UserServices from '../../Services/Providers/UserService';
+import TokenServices from "../../Services/Providers/TokenServices";
 
 interface myState {
     Password: string
@@ -40,7 +40,7 @@ export default class LoginForm extends React.Component<{}, myState>{
         this.setState({ PasswordHidden: true });
     }
     render() {    
-        if (localStorage.getItem('Usertoken')){
+        if (TokenServices.getToken()){
             return <Redirect to='/Dashboard'></Redirect>
         }
         return (

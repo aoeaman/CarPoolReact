@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import UserService from '../../Services/UserService';
+import UserService from '../../Services/Providers/UserService';
 import $ from 'jquery';
 
 interface myState {

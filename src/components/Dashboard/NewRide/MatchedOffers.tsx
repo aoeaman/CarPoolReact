@@ -1,25 +1,31 @@
 import * as React from "react";
-import UserServices from "../../../Services/UserService";
-import OfferService from "../../../Services/OfferService";
 import Popup from "reactjs-popup";
 import OfferCard from "../Components/OfferCard";
-const UserService = new UserServices();
-const offerService = new OfferService();
-class Offers extends React.Component<{ source, destination, seats,Date, bookride }, { Offer }>{
+import { OfferService, UserService } from "../../../Context";
+import Offer from "../../../Models/Offer";
+
+interface OffersProps{
+     source, 
+     destination, 
+     seats,
+     Date, 
+     bookride 
+    }
+class MatchedOffers extends React.Component<OffersProps, { Offer:Offer[] }>{
     items: any
     constructor(props) {
         super(props);
-        this.state = { Offer: new Array<any>() }
-        this.items = new Array<any>();
+        this.state = { Offer: new Array<Offer>() }
+        this.items = new Array<Offer>();
         this.componentDidUpdate(this.props);
     }
     async componentDidUpdate(prevProps) {
         this.items = [];
         let seat=0;
-        let offers = await offerService.getFilteredOffers(this.props.source, this.props.destination,
+        let offers = await OfferService.getFilteredOffers(this.props.source, this.props.destination,
             this.props.seats,this.props.Date);
         offers.forEach(async o => {
-            let name = (await UserService.getByID(o.userID.toString())).name;
+            let user = (await UserService.getByID(o.userID.toString()));
             let seatButtons = [];
             for (let i = 1; i <= o.seatsAvailable; i++) {
                 seatButtons.push(<button key={i} onClick={()=>seat=i}>{i}</button>)
@@ -27,9 +33,10 @@ class Offers extends React.Component<{ source, destination, seats,Date, bookride
             this.items.push(
                 <Popup modal={true} key={o.id} className='Modal' repositionOnResize={true}
                     trigger={<div>
-                        <OfferCard key={o.id} Data={o} name={name} /></div>}>
+                        <OfferCard key={o.id} Data={o} user={user} /></div>}>
                     <div className='Modal'>
                         <span>Do you want to Book this Offer</span>
+                        <span>Select Number Of Seats To Book</span>
                         <div>
                         {seatButtons}
                         </div>
@@ -47,13 +54,13 @@ class Offers extends React.Component<{ source, destination, seats,Date, bookride
         }
     }
     render() {
-        let item = this.state.Offer;
+        let {Offer}=this.state;
         return (
             <div id="allmatches">
-                {item}
+                {Offer}
             </div>
         );
     }
 }
 
-export default Offers;
+export default MatchedOffers;

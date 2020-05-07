@@ -2,11 +2,10 @@ import * as React from 'react';
 import Header from './Components/Header';
 import { Redirect, Route, Switch, } from 'react-router';
 import Home from './Home';
-import NewRide from './NewRide/NewRide';
-import NewOffer from './NewOffer/NewOffer';
-import UserServices from '../../Services/UserService'
+import NewRide from './NewRide';
+import NewOffer from './NewOffer';
 import User from '../../Models/User';
-import TokenServices from '../../Services/TokenServices';
+import TokenServices from '../../Services/Providers/TokenServices';
 import MyRides from './MyRides';
 import Profile from './Profile';
 
@@ -16,12 +15,10 @@ interface myStates {
 export default class Dashboard extends React.Component<{}, myStates>{
     token: string;
     id: string
-    UserService: UserServices
     user: User
     constructor(props) {
         super(props)
         this.state = { isAuthenticated: false}
-        this.UserService = new UserServices();
     }
 
     async UNSAFE_componentWillMount() {

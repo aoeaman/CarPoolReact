@@ -1,11 +1,11 @@
 import React from "react";
 
-const OfferCard = ({ name, Data }) => {
+const OfferCard = ({ user, Data }) => {
     return (
             <div className="OfferCard ms-depth-8">
                 <div id="name">
-                    <label>{name}</label>
-                    {/* <img id='point' /> */}
+                    <label>{user.name}</label>
+                    {<img className='Username' src={user.profileImage} />}
                 </div>
                 <div id="section">
                     <div id="from">

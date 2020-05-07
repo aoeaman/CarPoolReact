@@ -1,9 +1,10 @@
-import Offer, { ViaPoints } from "../Models/Offer";
+import Offer, { ViaPoints } from "../../Models/Offer";
 import Axios from "axios";
 import TokenServices from "./TokenServices";
-import {Cities} from "../Models/Cities";
+import {Cities} from "../../Models/Cities";
+import IOfferService from "../Contracts/IOfferServices";
 
-export default class OfferService {
+export default class OfferServices implements IOfferService {
     async getByID(ID: string) {
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/offer/${ID}`, { headers: { Authorization: AuthStr } });

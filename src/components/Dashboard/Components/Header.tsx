@@ -1,43 +1,42 @@
 import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
+import TokenServices from "../../../Services/Providers/TokenServices";
 import User from "../../../Models/User";
-import TokenServices from "../../../Services/TokenServices";
-import UserServices from "../../../Services/UserService";
+import { UserService } from "../../../Context";
 
 interface myStates {
-    Name: string
+    User: User
 }
-
 export default class Header extends React.Component<{}, myStates> {
-    UserService: UserServices;
     constructor(props) {
         super(props)
         this.logout.bind(this);
-        this.state = { Name: '' }
-        this.UserService = new UserServices();
+        this.state = { User:new User() }
     }
-    logout() {
+    private logout():void {
         alert('Loging Out');
         TokenServices.removeToken();
     }
+
     async UNSAFE_componentWillMount() {
-        let name = (await this.UserService.getByID(TokenServices.getUserID())).name;
-        this.setState({ Name: name });
+        let User = (await UserService.getByID(TokenServices.getUserID()));
+        this.setState({ User: User });
     }
+
     componentDidMount() {
         document.getElementById('Logo').addEventListener("click", () => {
             history.pushState(null, null, '/');
             window.location.reload();
         })
     }
+
     render() {
         return (
             <React.Fragment>
                 <div id='Logo'></div>
-                {/* <UserOptions Logout={this.logout} Name={this.state.Name} /> */}
                 <React.Fragment>
-                    <div id='User_Name'>{this.state.Name}</div>
-                    <button id='DropDown'></button>
+                    <div id='User_Name'>{this.state.User.name}</div>
+                    <button style={{backgroundImage:`url(${this.state.User.profileImage})`}} id='DropDown'></button>
                     <div id="Options">
                         <Link to='/Dashboard/Profile'><div>Profile</div></Link>
                         <Link to='/Dashboard/MyRides'><div>My Rides</div></Link>

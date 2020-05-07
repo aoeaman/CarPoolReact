@@ -1,20 +1,18 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import UserServices from "../../Services/UserService";
-import TokenServices from "../../Services/TokenServices";
+import TokenServices from "../../Services/Providers/TokenServices";
 import image from '../../Images/0003.png'
+import { UserService } from "../../Context";
 interface myStates {
     Name: string
 }
 export default class Home extends React.Component<{},myStates> {
-    UserService:UserServices;
     constructor(props) {
         super(props)
         this.state = { Name:''}
-        this.UserService=new UserServices()
     }
     async UNSAFE_componentWillMount() {
-        let name=(await this.UserService.getByID(TokenServices.getUserID())).name.split(' ')[0]
+        let name=(await UserService.getByID(TokenServices.getUserID())).name.split(' ')[0]
         this.setState({ Name:name})  
     }
     componentDidMount(){

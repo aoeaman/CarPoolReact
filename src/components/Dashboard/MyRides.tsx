@@ -1,42 +1,46 @@
 import React from "react";
-import OfferService from "../../Services/OfferService";
 import OfferCard from "./Components/OfferCard";
 import image from '../../Images/0004.png'
-import BookingService from "../../Services/BookingService";
-import UserServices from "../../Services/UserService";
+import { BookingService, OfferService, UserService } from "../../Context";
+import User from "../../Models/User";
+import Offer from "../../Models/Offer";
 
-const offerService = new OfferService();
-const bookingService = new BookingService();
-const UserService = new UserServices();
-
+interface IOfferCard{
+	User:User
+	Offer:Offer
+}
 interface myStates {
-	Bookings: Array<any>
-	Offers: Array<any>
-	flag:boolean
+	Bookings: IOfferCard[]
+	Offers: IOfferCard[]
 }
 export default class MyRides extends React.Component<{}, myStates>{
 	constructor(props) {
 		super(props);
-		this.state = { Bookings: new Array<any>(), Offers: new Array<any>() ,flag:false};
+		this.state = { Bookings:[], Offers: []};
 	}
 	componentDidMount() {
 		document.getElementById('Dashboard').style.backgroundImage = `url(${image})`;
 	}
 	async componentWillMount() {
-		let bookings = await bookingService.getByUserID();
+		let x:IOfferCard[]=[];
+		let bookings = await BookingService.getByUserID();
 		bookings.forEach(async o => {
-			let offer = await offerService.getByID(o.offerID.toString());
-			let name = (await UserService.getByID(offer.userID)).name;
-			this.state.Bookings.push(<OfferCard Data={offer} name={name} />);
-			this.setState({Bookings:this.state.Bookings});
+			let offer:Offer = await OfferService.getByID(o.offerID.toString());
+			let user:User = (await UserService.getByID(offer.userID.toString()));
+			let obj:IOfferCard={Offer:offer,User:user}
+			x.push(obj);
+			this.setState({Bookings:x});
 		});
-		let offers = await offerService.getByUserID();
+
+		let y:IOfferCard[]=[];
+		let offers = await OfferService.getByUserID();
 		offers.forEach(async o => {
-			let bookings = await bookingService.getByOfferID(o.id);
+			let bookings = await BookingService.getByOfferID(o.id);
 			bookings.map(async b => {
-				let name = (await UserService.getByID(b.userID.toString())).name;
-				this.state.Offers.push(<OfferCard Data={b} name={name} />);
-				this.setState({Offers:this.state.Offers});
+				let user = (await UserService.getByID(b.userID.toString()));
+				let obj:IOfferCard={Offer:b,User:user}
+				y.push(obj);
+				this.setState({Offers:y});
 			});
 		});
 	}
@@ -45,15 +49,16 @@ export default class MyRides extends React.Component<{}, myStates>{
 		return (
 			<React.Fragment>
 				<div className="User_Bookings">
-					<p id='p1'>Booked rides<button onClick={()=>console.log(this.state)}>lol</button></p>
+					<p id='p1'>Booked rides</p>
 					<div className='Data'>
-						{this.state.Bookings}
+						{this.state.Bookings.map(x=> {return(<OfferCard Data={x.Offer} user={x.User} />)})}
+						
 					</div>
 				</div>
 				<div className="User_Bookings">
 					<p id='p2'>Offered rides</p>
 					<div className='Data'>
-						{this.state.Offers}
+						{this.state.Offers.map(x=> {return(<OfferCard Data={x.Offer} user={x.User} />)})}
 					</div>
 				</div>
 			</React.Fragment>

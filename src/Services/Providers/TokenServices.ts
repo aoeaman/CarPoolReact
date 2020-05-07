@@ -1,5 +1,7 @@
+import ITokenServices from "Services/Contracts/ITokenServices";
+
 var jwtDecode = require('jwt-decode');
-var TokenServices={
+var TokenServices:ITokenServices={
     getAuthString:function(){
         return `Bearer ${JSON.parse(TokenServices.getToken())}`;
     },
@@ -13,7 +15,7 @@ var TokenServices={
         localStorage.setItem('Usertoken',token);
     },
     removeToken:function(){
-        localStorage.clear();
+        localStorage.removeItem('Usertoken');
     }
 }
 export default TokenServices;

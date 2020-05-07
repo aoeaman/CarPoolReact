@@ -1,8 +1,8 @@
 import * as React from 'react';
-import OfferService from '../../../Services/OfferService';
 import { Redirect } from 'react-router';
 import HideText from '../Components/ToggleButton';
 import image from '../../../Images/0004.png';
+import { OfferService } from '../../../Context';
 
 interface myStates {
     isNext: boolean
@@ -18,14 +18,12 @@ interface myStates {
 
 }
 export default class NewOffer extends React.Component<{}, myStates>  {
-    offerService: OfferService
     constructor(props) {
         super(props);
         this.state = {
             time: '', isNext: false, nextText: 'Next >>', Date: '',
             Destinaiton: '', Source: '', Seats: 0, ViaPoints: new Array<string>()
         };
-        this.offerService = new OfferService();
         this.addViaPoints.bind(this);
         this.onInput.bind(this);
         this.getTimeAndSeats.bind(this);
@@ -80,7 +78,7 @@ export default class NewOffer extends React.Component<{}, myStates>  {
     }
     onSubmit = async () => {
         let dateTime=this.state.Date+' 0'+this.state.time[0]+':00:00 '+ (this.state.time.substr(1,2)=='am'?'AM':'PM');
-        let offerID = await this.offerService.Create(this.state.Source,
+        let offerID = await OfferService.Create(this.state.Source,
              this.state.Destinaiton, this.state.ViaPoints, this.state.Seats,dateTime);
         if (offerID) {
             alert("Offer Created Successfully with ID " + offerID);
@@ -119,6 +117,7 @@ export default class NewOffer extends React.Component<{}, myStates>  {
                             <button id='Next_Button' type='submit' onClick={this.ShowNextForm}>{this.state.nextText}</button>
                         </form>
                             <HideText/>
+                            <div className='RouteIcon'/>
                     </div>
                     <div id='Form_Box' className='ms-depth-8'>
                         <form id='Box_form'>
@@ -182,6 +181,7 @@ export default class NewOffer extends React.Component<{}, myStates>  {
                             <button id='Next_Button' type='submit'>{this.state.nextText}</button>
                         </form>
                             <HideText/>
+                            <div className='RouteIcon'/>
                     </div>
                 </React.Fragment>
             );
