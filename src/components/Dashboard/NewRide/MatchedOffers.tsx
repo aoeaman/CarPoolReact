@@ -3,64 +3,74 @@ import Popup from "reactjs-popup";
 import OfferCard from "../Components/OfferCard";
 import { OfferService, UserService } from "../../../Context";
 import Offer from "../../../Models/Offer";
+import User from "../../../Models/User";
 
-interface OffersProps{
-     source, 
-     destination, 
-     seats,
-     Date, 
-     bookride 
-    }
-class MatchedOffers extends React.Component<OffersProps, { Offer:Offer[] }>{
-    items: any
+interface ICard {
+    Offer: Offer
+    User: User
+}
+
+interface MatchedOffersState {
+    Offer: ICard[]
+}
+interface OffersProps {
+    source:string,
+    destination:string,
+    seats:number,
+    Date:string,
+    bookride:Function
+}
+export default class MatchedOffers extends React.Component<OffersProps, MatchedOffersState>{
+    seats: number
     constructor(props) {
         super(props);
-        this.state = { Offer: new Array<Offer>() }
-        this.items = new Array<Offer>();
-        this.componentDidUpdate(this.props);
+        this.state = { Offer: [] }
+        this.seats = 0;
     }
-    async componentDidUpdate(prevProps) {
-        this.items = [];
-        let seat=0;
+    async componentWillMount() {
+        let x: ICard[] = [];
         let offers = await OfferService.getFilteredOffers(this.props.source, this.props.destination,
-            this.props.seats,this.props.Date);
+            this.props.seats, this.props.Date);
         offers.forEach(async o => {
             let user = (await UserService.getByID(o.userID.toString()));
-            let seatButtons = [];
-            for (let i = 1; i <= o.seatsAvailable; i++) {
-                seatButtons.push(<button key={i} onClick={()=>seat=i}>{i}</button>)
-            }
-            this.items.push(
-                <Popup modal={true} key={o.id} className='Modal' repositionOnResize={true}
-                    trigger={<div>
-                        <OfferCard key={o.id} Data={o} user={user} /></div>}>
-                    <div className='Modal'>
-                        <span>Do you want to Book this Offer</span>
-                        <span>Select Number Of Seats To Book</span>
-                        <div>
-                        {seatButtons}
-                        </div>
-                        <div>
-                        <button onClick={() => this.props.bookride(o.id,this.props,seat)}>Yes</button>
-                        <button>No</button>
-                        </div>
-                    </div>
-                </Popup>);
+            x.push({ Offer: o, User: user });
+            this.setState({ Offer: x });
         });
-        if (this.state.Offer.length == 0)
-            this.setState({ Offer: this.items })
-        else if (prevProps != this.props) {
-            this.setState({ Offer: [] });
+
+    }
+    GetSeatButtons = (Offer) => {
+        let seatButtons = [];
+        for (let i = 1; i <= Offer.seatsAvailable; i++) {
+            seatButtons.push(<button key={i} onClick={() => this.seats = i}>{i}</button>)
         }
+        return seatButtons;
     }
     render() {
-        let {Offer}=this.state;
+        let items = [];
+        items.push(this.state.Offer.map(o =>
+            <Popup modal={true} key={o.Offer.id} className='Modal' repositionOnResize={true}
+                trigger={<div>
+                    <OfferCard key={o.Offer.id} Data={o.Offer} user={o.User} /></div>}>
+                <div className='Modal'>
+                    <span>Do you want to Book this Offer</span>
+                    <span>Select Number Of Seats To Book</span>
+                    <div>
+                        {this.GetSeatButtons(o.Offer)}
+                    </div>
+                    <div>
+                        <button onClick={() => this.props.bookride(o.Offer.id, this.props, this.seats)}>
+                            Yes
+                            </button>
+                        <button>No</button>
+                    </div>
+                </div>
+            </Popup>));
+
         return (
             <div id="allmatches">
-                {Offer}
+                {items}
             </div>
         );
     }
 }
 
-export default MatchedOffers;

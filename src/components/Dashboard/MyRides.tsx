@@ -52,7 +52,6 @@ export default class MyRides extends React.Component<{}, myStates>{
 					<p id='p1'>Booked rides</p>
 					<div className='Data'>
 						{this.state.Bookings.map(x=> {return(<OfferCard Data={x.Offer} user={x.User} />)})}
-						
 					</div>
 				</div>
 				<div className="User_Bookings">
