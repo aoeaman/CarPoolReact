@@ -12,15 +12,17 @@ import Profile from './Profile';
 interface myStates {
     isAuthenticated: boolean
 }
+
 export default class Dashboard extends React.Component<{}, myStates>{
     token: string;
     id: string
     user: User
+    
     constructor(props) {
         super(props)
         this.state = { isAuthenticated: false}
     }
-
+    
     async UNSAFE_componentWillMount() {
         if (TokenServices.getToken() == undefined) {
             this.setState({ isAuthenticated: false })

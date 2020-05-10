@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 import UserService from '../../Services/Providers/UserService';
-import $ from 'jquery';
 
 interface myState {
     Name: string
@@ -12,6 +11,7 @@ interface myState {
     ConfirmPassword: string
     isSuccessful: boolean
 }
+
 export default class SignupForm extends Component<{}, myState> {
     Service: UserService
     constructor(props) {
@@ -22,15 +22,16 @@ export default class SignupForm extends Component<{}, myState> {
         }
         this.Service = new UserService();
     }
-    onInput(evt) {
-        let value=evt.target.value
+
+    private onInput(evt:any):void {
+        let value:any=evt.target.value
         this.setState({
             ...this.state,
             [evt.target.name]: value
         });
     }
-    async handleSubmit(event) {
-        event.preventDefault();
+
+    private async handleSubmit():Promise<void> {
         try {
             if (this.state.Password == this.state.ConfirmPassword) {
                 var id = await this.Service.Signup(this.state.Name,this.state.Username,this.state.Email,this.state.Password);
@@ -47,16 +48,20 @@ export default class SignupForm extends Component<{}, myState> {
             window.location.reload(false);
         }
     }
-    showPassword() {
+
+    private showPassword():void {
         this.setState({ PasswordHidden: false });
     }
-    hidePassword() {
+
+    private hidePassword():void {
         this.setState({ PasswordHidden: true });
     }
+
     render() {
         return (
             <Fragment>
-                <div id='Home'></div>
+                <div id='Home'>
+                </div>
                 <div id='Signup'>
                     <form id="SignupForm" onSubmit={this.handleSubmit.bind(this)}>
                         <div className='Form_Field'>

@@ -2,24 +2,27 @@ import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 import TokenServices from "../../../Services/Providers/TokenServices";
 import User from "../../../Models/User";
-import { UserService } from "../../../Context";
+import UserServices from "../../../Services/Providers/UserService";
 
 interface myStates {
     User: User
 }
 export default class Header extends React.Component<{}, myStates> {
+    UserService:UserServices
     constructor(props) {
         super(props)
-        this.logout.bind(this);
         this.state = { User:new User() }
+        this.UserService=new UserServices();
+        this.logout.bind(this);
     }
+    
     private logout():void {
         alert('Loging Out');
         TokenServices.removeToken();
     }
 
     async UNSAFE_componentWillMount() {
-        let User = (await UserService.getByID(TokenServices.getUserID()));
+        let User = (await this.UserService.getByID(TokenServices.getUserID()));
         this.setState({ User: User });
     }
 

@@ -1,9 +1,10 @@
 import * as React from "react";
 import Popup from "reactjs-popup";
 import OfferCard from "../Components/OfferCard";
-import { OfferService, UserService } from "../../../Context";
 import Offer from "../../../Models/Offer";
 import User from "../../../Models/User";
+import OfferServices from "../../../Services/Providers/OfferServices";
+import UserServices from "../../../Services/Providers/UserService";
 
 interface ICard {
     Offer: Offer
@@ -13,6 +14,7 @@ interface ICard {
 interface MatchedOffersState {
     Offer: ICard[]
 }
+
 interface OffersProps {
     source:string,
     destination:string,
@@ -20,31 +22,39 @@ interface OffersProps {
     Date:string,
     bookride:Function
 }
+
 export default class MatchedOffers extends React.Component<OffersProps, MatchedOffersState>{
     seats: number
+    OfferService:OfferServices
+    UserService:UserServices
     constructor(props) {
         super(props);
         this.state = { Offer: [] }
         this.seats = 0;
+        this.OfferService=new OfferServices();
+        this.UserService=new UserServices();
     }
+
     async componentWillMount() {
         let x: ICard[] = [];
-        let offers = await OfferService.getFilteredOffers(this.props.source, this.props.destination,
+        let offers = await this.OfferService.getFilteredOffers(this.props.source, this.props.destination,
             this.props.seats, this.props.Date);
         offers.forEach(async o => {
-            let user = (await UserService.getByID(o.userID.toString()));
+            let user = (await this.UserService.getByID(o.userID.toString()));
             x.push({ Offer: o, User: user });
             this.setState({ Offer: x });
         });
 
     }
-    GetSeatButtons = (Offer) => {
+
+    private GetSeatButtons(Offer:Offer):any[]{
         let seatButtons = [];
         for (let i = 1; i <= Offer.seatsAvailable; i++) {
             seatButtons.push(<button key={i} onClick={() => this.seats = i}>{i}</button>)
         }
         return seatButtons;
     }
+
     render() {
         let items = [];
         items.push(this.state.Offer.map(o =>

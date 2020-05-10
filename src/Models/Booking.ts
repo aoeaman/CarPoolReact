@@ -4,7 +4,7 @@ export default class Booking {
         this.StartDate=new Date();
     }
     id: number
-    UserID: number
+    userID: number
     offerID: number
     Source: number
     Destination: number

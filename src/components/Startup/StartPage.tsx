@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Dashboard from '../Dashboard/DashBoard';
+
 export default class StartPage extends React.Component {
     render() {
         return (

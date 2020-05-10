@@ -2,11 +2,13 @@
 //urls
 $url_1: url(../../Images/logo.png);
 $url_2: url(../../Images/point.png);
+$url_3: url(../../Images/0003.png);
 
 #Dashboard {
 	background-repeat: no-repeat;
 	background-size: 100% 50%;
 	background-position: bottom;
+	background-image: $url_3;
 }
 #Logo {
 	padding-top: 2%;
@@ -390,7 +392,7 @@ $url_2: url(../../Images/point.png);
 	width: 30%;
 	margin-left: 3%;
 	float: left;
-	height: 84%;
+	height: 81%;
 	margin-top: 2%;
 	> p {
 		background-color: $color_electric_violet_approx;

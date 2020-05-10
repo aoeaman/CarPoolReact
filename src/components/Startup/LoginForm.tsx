@@ -18,7 +18,8 @@ export default class LoginForm extends React.Component<{}, myState>{
         this.state = { Password: '', Email: '', PasswordHidden: true, isAuthenticated: false,isLoading:false};
         this.UserService=new UserServices();
     }
-    onInput(evt) {
+
+    private onInput(evt:any):void {
         let value=evt.target.value
         this.setState({
             ...this.state,
@@ -26,23 +27,26 @@ export default class LoginForm extends React.Component<{}, myState>{
         });
     }
 
-    async handleSubmit(){
+    private async handleSubmit():Promise<void>{
         let token=await this.UserService.Login(this.state.Email,this.state.Password);
         if(token!=null){
             TokenServices.setToken(token);
         }
         <Redirect from='/' to='/Dashboard'></Redirect>
     }
-    showPassword() {
+
+    private showPassword():void {
         this.setState({ PasswordHidden: false });
     }
-    hidePassword() {
+    private hidePassword():void {
         this.setState({ PasswordHidden: true });
     }
+
     render() {    
         if (TokenServices.getToken()){
             return <Redirect to='/Dashboard'></Redirect>
         }
+        
         return (
             <React.Fragment>
                 <div id='Home'></div>

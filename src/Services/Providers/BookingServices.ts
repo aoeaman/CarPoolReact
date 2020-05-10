@@ -14,6 +14,7 @@ export default class BookingServices implements IBookingService {
         Booking.destination = this.getKeyFromValue(Booking.destination);
         return Booking;
     }
+
     public async getByUserID():Promise<Array<Booking>> {
         let ID = TokenServices.getUserID();
         const AuthStr = TokenServices.getAuthString();
@@ -23,7 +24,8 @@ export default class BookingServices implements IBookingService {
         data = this.parseFilteredData(JSON.parse(JSON.stringify((await responce).data)));
         return data;
     }
-    public async getByOfferID(ID: string) {
+    
+    public async getByOfferID(ID: string):Promise<Booking[]> {
         const AuthStr = TokenServices.getAuthString();
         const responce = Axios.get(`https://localhost:5001/api/Booking/${ID}/Offer`,
             { headers: { Authorization: AuthStr } });
@@ -31,11 +33,12 @@ export default class BookingServices implements IBookingService {
         Booking=this.parseFilteredData(Booking);
         return Booking;
     }
-    public async Create(Source: string, Destination: string, Seats: number, OfferID: number) {
+
+    public async Create(Source: string, Destination: string, Seats: number, OfferID: number):Promise<string> {
         let booking:Booking = new Booking();
         booking.Source = Cities[Source];
         booking.Destination = Cities[Destination];
-        booking.UserID = Number(TokenServices.getUserID());
+        booking.userID = Number(TokenServices.getUserID());
         booking.offerID = OfferID;
         booking.Seats = Seats;
         booking.Fare = 18.50;
@@ -44,7 +47,8 @@ export default class BookingServices implements IBookingService {
             { headers: { Authorization: AuthStr } });
         return (await responce).data.message
     }
-    parseFilteredData(data) {
+
+    parseFilteredData(data:any):any {
         data.forEach(element => {
             element.source = this.getKeyFromValue(element.source);
             element.destination = this.getKeyFromValue(element.destination)
@@ -53,7 +57,8 @@ export default class BookingServices implements IBookingService {
         });
         return data;
     }
-    getKeyFromValue(val) {
+
+    getKeyFromValue(val:number):string {
         return Object.entries(Cities).find(i => i[1] == val)[0];
     }
 }
